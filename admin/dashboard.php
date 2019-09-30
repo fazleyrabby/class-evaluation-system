@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <?php include('includes/db/connection_db.php');?>
    <?php include('includes/head_link.php');?>
 </head>
     <body class="fixed-top">
@@ -42,7 +43,23 @@
                                             <div class="col-xs-5 text-center bg-dark card-content-right"><i class="icon-layers background-icon"></i></div>
                                             <div class="col-xs-7 text-center card-content-left">
                                                 <p class="card-stats-title right panel-title">Students</p>
-                                                <h4 class="right panel-middle margin-b-0">3100</h4>
+                                                <h4 class="right panel-middle margin-b-0">
+                                                
+                                                <?php 
+                                                $sql = "SELECT COUNT(*) as total_student from student where status = 1";
+
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                while($row = $result->fetch_assoc()) { 
+
+                                                    echo $row['total_student'];
+
+                                                    }
+                                                }
+
+                                                ?>
+                                                </h4>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -58,7 +75,24 @@
                                             <div class="col-xs-5 text-center bg-dark card-content-right"><i class="icon-user background-icon"></i></div>
                                             <div class="col-xs-7 text-center card-content-left">
                                                 <p class="card-stats-title right panel-title">Teachers</p>
-                                                <h4 class="right panel-middle margin-b-0">6,782</h4>
+                                                <h4 class="right panel-middle margin-b-0">
+                                                
+                                                <?php 
+                                                $sql = "SELECT COUNT(*) as total_teacher from teacher where status = 1";
+
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                while($row = $result->fetch_assoc()) { 
+
+                                                    echo $row['total_teacher'];
+
+                                                    }
+                                                }
+
+                                                ?>
+                                                
+                                                </h4>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -75,7 +109,24 @@
                                             <div class="col-xs-5 text-center bg-dark card-content-right"><i class="icon-list background-icon"></i></div>
                                             <div class="col-xs-7 text-center card-content-left">
                                                 <p class="card-stats-title right panel-title">Subjects</p>
-                                                <h4 class="right panel-middle margin-b-0">6,782</h4>
+                                                <h4 class="right panel-middle margin-b-0">
+                                                
+                                                <?php 
+                                                $sql = "SELECT COUNT(*) as total_subject from subject where status = 1";
+
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                while($row = $result->fetch_assoc()) { 
+
+                                                    echo $row['total_subject'];
+
+                                                    }
+                                                }
+
+                                                ?>
+                                                
+                                                </h4>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>

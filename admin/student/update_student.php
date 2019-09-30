@@ -49,7 +49,7 @@
                                 <div class="panel panel-card margin-b-30">
                                     <!-- Start .panel -->
                                     <div class="panel-heading">
-                                      Update Teacher Form
+                                      Update Student Form
                                     </div>
                                     <div class="panel-body">
 
@@ -64,6 +64,7 @@
                                         registration.name as name,
                                         registration.email as email,
                                         registration.department as dept,
+                                        registration.section as section,
                                         login.username as username,
                                         login.id  as login_id,
                                         student.id as student_f_id
@@ -125,6 +126,40 @@
                                                     </select>
                                                 </div>
                                         </div>
+
+
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Section</label>
+                                                <div class="col-lg-9">
+                                                    <select class="form-control form-control-sm" name="section">
+                                                    <option>Select Section</option>
+                                                    <?php
+                                                        $sql = "SELECT * from section where status = 1";
+                                                        $query = $conn->query($sql);
+                                                        $row = $query->num_rows;
+                                                        if ($row > 0) {
+                                                            while ($data = $query->fetch_assoc()){
+                                                                
+                                                                $id = $data['id'];
+                                                                $name = $data['section_name'];
+
+                                                                if ($t_data['section'] == $id) {
+                                                                   $select = "selected";
+                                                                }
+                                                                else{
+                                                                    $select = "";
+                                                                }
+                                                                
+                                                                echo "<option value='$id' $select>$name</option>";
+                                                            } 
+                                                        }
+                                                    ?>
+                                                    </select>
+                                                </div>
+                                        </div>
+
+
 
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Email</label>

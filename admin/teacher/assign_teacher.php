@@ -85,12 +85,27 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-md-3 control-label">Select Section</label>
+                                                <div class="col-lg-9 col-md-9">
+                                                    <select name="section" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <?php
+                                                        $sql = "SELECT * from section where status = 1";
+                                                        $result = $conn->query($sql);
+                                                        while($data = $result->fetch_assoc()){
+                                                            echo '<option value="'.$data['id'].'">'.$data['section_name'].'</option>';
+                                                        }
+                                                    ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             
                                     
                                             <div class="form-group">
                                                 <label class="col-lg-3 col-md-3 control-label">Select Subjects</label>
                                                 <div class="col-lg-9 col-md-9">
-                                                    <select name="subject[]" class="form-control subject" multiple>
+                                                    <select name="subject" class="form-control subject">
                                                     <?php
                                                         $sql = "SELECT * from subject where status = 1";
                                                         $result = $conn->query($sql);

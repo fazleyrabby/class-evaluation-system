@@ -53,7 +53,9 @@
                                                     <tr>
                                                         <th> Student ID</th>
                                                         <th> Student Name</th>
-                                                        <th> E-mail</th>
+                                                        <th> E-mail </th>
+                                                        <th> Department </th>
+                                                        <th> Section </th>
                                                         <th> Validation </th>
                                                         <th> Activate </th>
                                                         <th> Action </th>
@@ -63,8 +65,14 @@
                                                 <tbody>
                                                      
                                                 <?php 
-                                                $sql = "SELECT registration.member_id,registration.name,registration.email,registration.authentication as status from registration left join student on student.student_id=registration.member_id 
-                                                left join login on login.id=registration.login_id
+                                                $sql = "SELECT registration.member_id,registration.name,registration.email,registration.authentication as status,
+                                                section.section_name as section,
+                                                department.department_name as department
+                                                FROM  student 
+                                                LEFT JOIN registration on student.student_id=registration.member_id 
+                                                LEFT JOIN login on login.id=registration.login_id
+                                                LEFT JOIN section on section.id=registration.section
+                                                LEFT JOIN department on department.id=registration.department
                                                 where registration.authentication != 2 and login.user_type=3";
 
                                                 $result = $conn->query($sql);
@@ -76,6 +84,8 @@
                                                     <td><?php echo $row['member_id'];?></td>
                                                     <td><?php echo $row['name'];?></td>
                                                     <td><?php echo $row['email'];?></td>
+                                                    <td><?php echo $row['department'];?></td>
+                                                    <td><?php echo $row['section'];?></td>
                                                     
                                                     <td>
                                                       <?php

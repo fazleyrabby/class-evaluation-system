@@ -58,7 +58,7 @@
                                     if(isset($_GET['id'])){
                                       $id = $_GET['id'];
 
-                                      $teacher_data = "SELECT teacher_id,session_id,subject_id from assign_teacher where id=$id";
+                                      $teacher_data = "SELECT teacher_id,session_id,subject_id,section_id from assign_teacher where id=$id";
 
                                       $query = $conn->query($teacher_data);
 
@@ -113,28 +113,53 @@
                                                 </div>
                                             </div>
 
+
+                                            <div class="form-group">
+                                                <label class="col-lg-3 col-md-3 control-label">Select Section</label>
+                                                <div class="col-lg-9 col-md-9">
+                                                    <select name="section" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <?php
+                                                        $sql = "SELECT * from section where status = 1";
+                                                        $result = $conn->query($sql);
+                                                        while($section = $result->fetch_assoc()){
+
+                                                          if ($section['id'] == $data['section_id']) {
+                                                            $select = "selected";
+                                                          }
+                                                          else{
+                                                            $select = '';
+                                                          }
+                                                            echo '<option value="'.$section['id'].'"'.$select.'>'.$section['section_name'].'</option>';
+                                                        }
+                                                    ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             
                                     
                                             <div class="form-group">
-                                                <label class="col-lg-3 col-md-3 control-label">Select Subjects</label>
+                                                <label class="col-lg-3 col-md-3 control-label">Select Subject</label>
                                                 <div class="col-lg-9 col-md-9">
-                                                    <select name="subject[]" class="form-control subject" multiple>
+                                                    <select name="subject" class="form-control subject">
                                                     <?php
                                                         $sql = "SELECT * from subject where status = 1";
 
                                                         $result = $conn->query($sql);
-                                                        $all_sub = array();
-                                                        $all_sub = explode(",",$data['subject_id']);
+                                                        // $all_sub = array();
+                                                        // $all_sub = explode(",",$data['subject_id']);
                                                         while($subject = $result->fetch_assoc()){
-
-                                                          for ($i=0; $i < count($all_sub); $i++) { 
-                                                            if ($all_sub[$i] == $subject['id']) {
+                                                            if ($data['subject_id'] == $subject['id']) 
+                                                            {
                                                               $select = "selected";
                                                             }
-                                                          }
+                                                            else{
+                                                                $select='';
+                                                            }
+                                                          
                                                           echo '<option value="'.$subject['id'].'"'.$select.'>'.$subject['subject_name'].' </option>';
                                                           
-                                                          $select='';
+                                                          
                                                             
                                                         }
                                                         // print_r($all_sub);

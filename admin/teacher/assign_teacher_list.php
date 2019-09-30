@@ -54,7 +54,8 @@
                                                         <th> Teacher ID </th>
                                                         <th> Teacher Name </th>
                                                         <th> Session </th>
-                                                        <th> Subjects </th>
+                                                        <th> Section </th>
+                                                        <th> Subject </th>
                                                         <th> Update </th>
                                                     </tr>
                                                 </thead>
@@ -67,21 +68,24 @@
                                                 assign_teacher.teacher_id as teacher_id,
                                                 session.session_name as session,
                                                 session.year as year,
-                                                assign_teacher.subject_id as subject_id,
+                                                section.section_name as section_name,
                                                 teacher.name as teacher_name,
-                                                group_concat(subject.subject_name) as subject
+                                                subject.subject_name as subject
                                                 from 
                                                     assign_teacher 
-                                                    left join 
+                                                left join 
                                                     teacher on assign_teacher.teacher_id = teacher.teacher_id
                                                 left join 
-                                                    subject on find_in_set(subject.id, assign_teacher.subject_id) 
+                                                    subject on subject.id=
+                                                    assign_teacher.subject_id
                                                 left join 
-                                                    session on          session.id=assign_teacher.session_id 
+                                                    section on
+                                                    section.id=assign_teacher.section_id
+                                                left join 
+                                                    session on  
+                                                    session.id=assign_teacher.session_id 
                                                 where 
                                                     assign_teacher.status = 1
-                                                group by 
-                                                    assign_teacher.subject_id
                                                 ";
 
                                                 $result = $conn->query($sql);
@@ -93,7 +97,10 @@
                                                     <td><?php echo $row['teacher_id'];?></td>
                                                     <td><?php echo $row['teacher_name'];?></td>
                                                     <td><?php echo "(".$row['year'].") ".$row['session']?></td>
+                                                    <td><?php echo $row['section_name']?></td>
                                                     <td><?php echo $row['subject'];?></td>
+
+
                                                          
 
                                                     <td class="text-center">

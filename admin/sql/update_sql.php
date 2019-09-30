@@ -104,8 +104,8 @@ if(isset($_GET['status']) && isset($_GET['id']) && isset($_GET['type']))
 {
 	$id=$_GET['id'];
 	$status=$_GET['status'];
-	$type=$_GET['type'];  //check if student or teacher
-
+	$type=$_GET['type'];  
+	//check if student or teacher
   if ($type == 2) {
 		$member_type = "teacher";
 	}
@@ -124,6 +124,7 @@ if(isset($_GET['status']) && isset($_GET['id']) && isset($_GET['type']))
 			$auth = 2;  //To reject 
 	}
 
+
 	$sql = "UPDATE registration SET authentication=$auth WHERE member_id='$id'";
 
 	$query = $conn->query($sql);
@@ -131,27 +132,27 @@ if(isset($_GET['status']) && isset($_GET['id']) && isset($_GET['type']))
 	if($query === TRUE){
 
 		if($auth == 1){
-			//CHECK IF EXISTS ON TEACHER TABLE
+			//CHECK IF EXISTS ON TEACHER/Student TABLE
 			$exist_data = "SELECT * from ".$member_type." where ".$member_type."_id ='$id' and status = 1"; 
 	
 			$check = $conn->query($exist_data);
 
-				if ($check->num_rows == 0) {
-					//If not exists on teacher table than get data from registration and insert into// 
-					$sql2 = "INSERT into ".$member_type."(".$member_type."_id,name,status,created_at) VALUES ('$id',(SELECT name from registration where member_id='$id' and authentication=1),1,now())"; 
-					//table name and member id changed according to user type sent from teacher/student list//
-	
-					if ($conn->query($sql2) === TRUE) 
-					{
+					if ($check->num_rows == 0) {
+						//If not exists on teacher/student table than get data from registration and insert into// 
+							$sql2 = "INSERT into ".$member_type."(".$member_type."_id,name,status,created_at) VALUES ('$id',(SELECT name from registration where member_id='$id' and authentication=1),1,now())"; 
+							//table name and member id changed according to user type sent from teacher/student list//
+			
+							if ($conn->query($sql2) === TRUE) 
+							{
+								$_SESSION['alert'] = "Activated Successfully!";
+								header('location: ../'.$member_type.'/'.$member_type.'_list.php');
+							}
+
+					}
+					else{
 						$_SESSION['alert'] = "Activated Successfully!";
 						header('location: ../'.$member_type.'/'.$member_type.'_list.php');
 					}
-
-				}
-				else{
-					$_SESSION['alert'] = "Activated Successfully!";
-					header('location: ../'.$member_type.'/'.$member_type.'_list.php');
-				}
 		
 		}
 		elseif($auth == 0){
@@ -180,7 +181,8 @@ if(isset($_GET['status']) && isset($_GET['id']) && isset($_GET['type']))
 
 
 //================== *Update Teacher Start* ============================//
-if (isset($_POST['update_teacher'])) 
+
+if(isset($_POST['update_teacher'])) 
 {
 $login_id = $_POST['login_id'];
 $teacher_f_id = $_POST['teacher_f_id'];
@@ -244,13 +246,14 @@ elseif(isset($_POST['update_assign_teacher']))
 
 	$subjects = $_POST['subject'];
 	$session = $_POST['session'];
+	$section = $_POST['section'];
 	$teacher = $_POST['teacher'];
 	$id = $_POST['id'];
 
-	$subject = implode(",",$subjects);  
+	// $subject = implode(",",$subjects);  
 
 
-		$sql = "UPDATE assign_teacher set session_id='$session',subject_id='$subject' where id=$id";
+		$sql = "UPDATE assign_teacher set session_id='$session',subject_id='$subjects',section_id=$section where id=$id";
 
 		if ($conn->query($sql) === TRUE) 
 		{
@@ -286,6 +289,7 @@ $name=$_POST['name'];
 $email=$_POST['email'];
 $username=$_POST['username'];
 $department=$_POST['department'];
+$section=$_POST['section'];
 $password=md5($_POST['password']);
 
 
@@ -301,7 +305,7 @@ if ($conn->query($login) === TRUE)
 {
 		// $last_id = $conn->insert_id;
 		//FOR REGISTRATION FORM//
-		$reg = "UPDATE registration set name='$name',department='$department',member_id='$student_id' where login_id=$login_id";
+		$reg = "UPDATE registration set name='$name',section='$section',department='$department',member_id='$student_id' where login_id=$login_id";
 
 		//FOR teacher table
 		$student = "UPDATE student set name='$name',student_id='$student_id' where id=$student_f_id";
@@ -331,6 +335,36 @@ else
 
 //================== *Update student Ends* ============================//
 
+
+
+
+//================== *Update section Starts* ============================//
+
+
+if(isset($_POST['update_section'])) 
+{
+	$id=$_POST['id'];
+	$section_name=$_POST['section_name'];
+
+	$sql = "UPDATE section SET section_name='$section_name' WHERE id=$id";
+
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "section Updated Successfully!";
+		header('location: ../section/section_list.php');
+	}
+
+	else
+	{			
+			$_SESSION['alert'] = "Error Occured!";
+			header('location: ../section/update_section.php?id='.$id.'');
+	}	
+
+}
+
+
+
+//================== *Update section Ends* ============================//
 
 
 

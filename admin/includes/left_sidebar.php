@@ -32,6 +32,14 @@
                                     <li><a href="<?=$base?>/subject/subject_list.php">Subject List</a></li>
                                 </ul>
                             </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage  Section</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">                               
+                                    <li><a href="<?=$base?>/section/add_section.php">Add Section</a></li>
+                                    <li><a href="<?=$base?>/section/section_list.php">Section List</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage  Session</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
