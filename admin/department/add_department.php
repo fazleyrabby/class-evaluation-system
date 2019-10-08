@@ -30,7 +30,7 @@
                             <div class="col-sm-12">
                                 <div class="page-title">
                                     <div class="row">
-                                        <h4 class="pull-left">Add Department</h4>
+                                        <h4 class="pull-left">Add class</h4>
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                 <div class="panel panel-card margin-b-30">
                                     <!-- Start .panel -->
                                     <div class="panel-heading">
-                                      Add Department Form
+                                      Add class Form
                                     </div>
                                     <div class="panel-body">
 
@@ -54,24 +54,20 @@
                                     <form class="form-horizontal" method="post" action="<?=$base?>/sql/insert_sql.php">
                                          
                                               <div class="form-group">
-                                                <label class="col-lg-3 control-label">Department Name
+                                                <label class="col-lg-3 control-label">class Name
                                                 </label>
 
-                                            <div class="col-lg-9"><input type="text" name="department_name" placeholder="Department Name" class="form-control"> 
+                                            <div class="col-lg-9"><input type="text" name="class_name" placeholder="class Name" class="form-control"> 
                                             </div>
                                             </div>
-                                    
-                                      
                                           
                                             <div class="form-group">
                                                 <div class="col-lg-offset-3 col-lg-9">
-                                                    <input type="submit" class="btn btn-sm btn-primary" name="add_department" value="submit">
+                                                    <input type="submit" class="btn btn-sm btn-primary" name="add_class" value="submit">
                                                
                                                 </div>
                                             </div>
 
-
-                                           
                                         </form>
                                         <!-- form -->
 

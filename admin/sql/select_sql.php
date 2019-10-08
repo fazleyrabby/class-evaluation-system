@@ -20,12 +20,17 @@ if (isset($_POST['login']))
 			$id = $data['id'];
 			$_SESSION['username'] = $username;
 			$_SESSION['user_type'] = $user_type;
+			$_SESSION['id'] = $id;
 			// CHECK IF thE ACCOUNT IS ACTIVE
 			if ($user_type != 1) {  // 1 is only for admin
 					$auth = "SELECT * from registration where login_id = '$id' and authentication = 1";
 					$check = $conn->query($auth);
+					$reg_data = $check->fetch_all();
 					if ($check->num_rows == 1) { 
+						$_SESSION['member_id'] = $reg_data[0][1];
 						header('location: ../dashboard.php');
+						// echo "<pre>";
+						// print_r($reg_data);
 						exit;
 					}
 					else{

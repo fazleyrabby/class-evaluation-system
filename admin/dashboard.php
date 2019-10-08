@@ -28,7 +28,16 @@
                                 <div class="page-title">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <h3 class="pull-left">Admin Panel</h3>
+                                            <h3 class="pull-left">
+                                                <?php 
+                                                    if (isset($_SESSION['username']) && ($_SESSION['user_type'] == 2 or $_SESSION['user_type'] == 3)) {
+                                                        echo "Welcome ".ucwords($_SESSION['username']);
+                                                    }
+                                                    elseif(isset($_SESSION['username']) && $_SESSION['user_type'] == 2){
+                                                        echo "Welcome Admin";
+                                                    }
+                                                ?>
+                                            </h3>
                                         </div>
                                     </div>
                                 </div>

@@ -56,6 +56,7 @@
                                                         <th> Session </th>
                                                         <th> Section </th>
                                                         <th> Subject </th>
+                                                        <th> Teacher Status </th>
                                                         <th> Update </th>
                                                     </tr>
                                                 </thead>
@@ -65,6 +66,7 @@
                                                 <?php 
                                                 $sql = "SELECT 
                                                 assign_teacher.id as id,
+                                                assign_teacher.status as status,
                                                 assign_teacher.teacher_id as teacher_id,
                                                 session.session_name as session,
                                                 session.year as year,
@@ -83,10 +85,7 @@
                                                     section.id=assign_teacher.section_id
                                                 left join 
                                                     session on  
-                                                    session.id=assign_teacher.session_id 
-                                                where 
-                                                    assign_teacher.status = 1
-                                                ";
+                                                    session.id=assign_teacher.session_id";
 
                                                 $result = $conn->query($sql);
 
@@ -100,13 +99,17 @@
                                                     <td><?php echo $row['section_name']?></td>
                                                     <td><?php echo $row['subject'];?></td>
 
-
-                                                         
+                                                    <td>
+                                                    <?php echo($row['status'] == 1 ? "Pending" : ($row['status']  == 2 ? "<strong class='text-info'>Will Take Class</strong>" : ($row['status'] == 0 ? "<strong class='text-danger'>Will Not Take</strong>" : "--"))); 
+                                                    ;?>
+                                                    </td>
 
                                                     <td class="text-center">
+                                                    <?php if($row['status'] == 1) : ?>
                                                         <a href="update_assign_teacher.php?id=<?php echo $row['id']?>"class="btn btn-success">
                                                         EDIT
-                                                        </a>  
+                                                        </a> 
+                                                    <?php endif; ?>
                                                     </td>
                                                 </tr>
 

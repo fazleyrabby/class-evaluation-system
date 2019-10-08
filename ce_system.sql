@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2019 at 06:23 PM
+-- Generation Time: Oct 08, 2019 at 09:03 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -25,6 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `assign_class`
+--
+
+CREATE TABLE `assign_class` (
+  `id` bigint(20) NOT NULL,
+  `assign_teacher_id` bigint(20) DEFAULT NULL COMMENT 'this id is from assign teacher table',
+  `number_of_class` bigint(20) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `assign_class`
+--
+
+INSERT INTO `assign_class` (`id`, `assign_teacher_id`, `number_of_class`, `created_at`, `updated_at`) VALUES
+(1, 2, 12, '2019-10-08 11:55:26', '2019-10-08 05:55:26'),
+(2, 6, 5, '2019-10-08 23:12:25', '2019-10-08 17:12:25');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `assign_teacher`
 --
 
@@ -34,7 +56,7 @@ CREATE TABLE `assign_teacher` (
   `session_id` int(11) DEFAULT NULL,
   `subject_id` int(11) DEFAULT NULL,
   `section_id` int(11) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1=active,2=will take class, 0=will not take any class',
   `created_at` datetime DEFAULT NULL,
   `udpated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -45,11 +67,69 @@ CREATE TABLE `assign_teacher` (
 
 INSERT INTO `assign_teacher` (`id`, `teacher_id`, `session_id`, `subject_id`, `section_id`, `status`, `created_at`, `udpated_at`) VALUES
 (1, 'CSET1234567890', 1, 6, 1, 1, '2019-09-07 00:09:49', '2019-09-06 18:09:49'),
-(2, 'EEET0987654321', 1, 6, 2, 1, '2019-09-10 20:45:35', '2019-09-10 14:45:35'),
+(2, 'EEET0987654321', 1, 6, 2, 2, '2019-09-10 20:45:35', '2019-09-10 14:45:35'),
 (3, 'CSET0987654321', 2, 4, 1, 1, '2019-09-10 21:44:43', '2019-09-10 15:44:43'),
 (4, 'EEE0989898777', 4, 4, 2, 1, '2019-09-17 20:43:40', '2019-09-17 14:43:40'),
 (5, 'CSET1234567890', 2, 3, 2, 1, '2019-09-28 01:17:54', '2019-09-27 19:17:54'),
-(6, 'EEET0987654321', 3, 2, 1, 1, '2019-09-30 22:20:39', '2019-09-30 16:20:39');
+(6, 'EEET0987654321', 3, 2, 1, 1, '2019-09-30 22:20:39', '2019-09-30 16:20:39'),
+(7, 'EEET0987654321', 4, 1, 1, 1, '2019-10-08 23:11:50', '2019-10-08 17:11:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `class_review`
+--
+
+CREATE TABLE `class_review` (
+  `id` bigint(20) NOT NULL,
+  `class_topic_id` bigint(20) DEFAULT NULL COMMENT 'this id from class topic table',
+  `comment` longtext COLLATE utf8_unicode_ci,
+  `student_id` bigint(20) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `course_outline`
+--
+
+CREATE TABLE `course_outline` (
+  `id` int(11) NOT NULL,
+  `assign_class_id` int(11) DEFAULT NULL COMMENT 'from assign class',
+  `course_outline` text COLLATE utf8_unicode_ci,
+  `class_no` int(11) DEFAULT NULL COMMENT 'from assign class',
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `course_outline`
+--
+
+INSERT INTO `course_outline` (`id`, `assign_class_id`, `course_outline`, `class_no`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'asdasd', 1, 1, '2019-10-09 00:17:55', NULL),
+(2, 1, 'hey this is class 2', 2, 1, '2019-10-09 00:19:32', NULL),
+(3, 1, 'new topic for class 3', 3, 1, '2019-10-09 00:58:36', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `daily_class_lecture`
+--
+
+CREATE TABLE `daily_class_lecture` (
+  `id` int(11) NOT NULL,
+  `assign_class_id` int(11) DEFAULT NULL COMMENT 'this id from assign class table',
+  `class_topic` longtext COLLATE utf8_unicode_ci,
+  `class_date` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -260,9 +340,33 @@ INSERT INTO `teacher` (`id`, `teacher_id`, `name`, `status`, `created_at`, `upda
 --
 
 --
+-- Indexes for table `assign_class`
+--
+ALTER TABLE `assign_class`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `assign_teacher`
 --
 ALTER TABLE `assign_teacher`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `class_review`
+--
+ALTER TABLE `class_review`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `course_outline`
+--
+ALTER TABLE `course_outline`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `daily_class_lecture`
+--
+ALTER TABLE `daily_class_lecture`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -318,10 +422,34 @@ ALTER TABLE `teacher`
 --
 
 --
+-- AUTO_INCREMENT for table `assign_class`
+--
+ALTER TABLE `assign_class`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `assign_teacher`
 --
 ALTER TABLE `assign_teacher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `class_review`
+--
+ALTER TABLE `class_review`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `course_outline`
+--
+ALTER TABLE `course_outline`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `daily_class_lecture`
+--
+ALTER TABLE `daily_class_lecture`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `department`

@@ -328,6 +328,107 @@ elseif(isset($_POST['add_section']))
 
 //================== *Add section Ends* ============================//
 
+
+
+//================== *Add No of class starts* ============================//
+
+
+
+
+elseif(isset($_POST['add_no_of_class'])) 
+{
+	$total_class_number=$_POST['total_class_number'];
+	$assign_teacher_id=$_POST['assign_teacher_id'];
+
+	$sql = "INSERT INTO assign_class(assign_teacher_id,number_of_class,created_at) VALUES ($assign_teacher_id,$total_class_number,now())";
+
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "Number Of Class assigned Successfully!";
+		header('location: ../class/assigned_subject_list.php');
+	}
+
+	else
+	{			
+			$_SESSION['alert'] = "Error Occured!";
+			header('location: ../class/assigned_subject_list.php');
+	}	
+
+
+}
+
+
+
+
+
+
+
+//================== *Add No of class ends* ============================//
+
+
+
+//================== *Add No of class starts* ============================//
+
+
+
+
+elseif(isset($_POST['add_course_outline'])) 
+{
+	$class_no=$_POST['number_of_class'];
+	$course_outline=mysqli_real_escape_string($conn,$_POST['course_outline']);
+	$assign_class_id=$_POST['assign_class_id'];
+
+
+	$sql = "INSERT INTO course_outline(assign_class_id,class_no,course_outline,created_at) VALUES ($assign_class_id,$class_no,'$course_outline',now())";
+
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "Class Outline added succesfully!";
+		header('location: ../course_outline/assign_course_outline.php?id='.$assign_class_id.'');
+	}
+
+	else
+	{		
+			mysqli_error($conn);	
+			exit;
+			$_SESSION['alert'] = "Error Occured!";
+			header('location: ../course_outline/assign_course_outline.php?id='.$assign_class_id.'');
+	}	
+
+
+}
+
+
+
+
+
+
+
+//================== *Add No of class ends* ============================//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ?>
 
 

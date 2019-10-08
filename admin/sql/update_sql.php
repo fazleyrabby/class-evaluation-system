@@ -366,8 +366,63 @@ if(isset($_POST['update_section']))
 
 //================== *Update section Ends* ============================//
 
+//================== *Update No of class starts* ============================//
 
 
 
+
+elseif(isset($_POST['update_no_of_class'])) 
+{
+	$total_class_number=$_POST['total_class_number'];
+
+	$id=$_POST['id'];
+
+	$sql = "UPDATE assign_class SET number_of_class='$total_class_number' WHERE id=$id";
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "Number Of Class updated Successfully!";
+		header('location: ../class/assigned_subject_list.php');
+	}
+
+	else
+	{			
+			$_SESSION['alert'] = "Error Occured!";
+			header('location: ../class/update_class.php?id='.$id.'');
+	}	
+
+	
+}
+
+
+
+
+//================== *Update No of class ends* ============================//
+
+//================== *Cancel class starts* ============================//
+
+elseif(isset($_GET['class_status']) && isset($_GET['id'])) 
+{
+if ($_GET['class_status'] == 'cancel') 
+{
+	$id=$_GET['id'];
+	$sql = "UPDATE assign_teacher SET status=0 WHERE id=$id";
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "Successfully Canceled!";
+		header('location: ../class/assigned_subject_list.php');
+	}
+
+	else
+	{			
+		$_SESSION['alert'] = "Error Occured";
+		header('location: ../class/assigned_subject_list.php');
+	}	
+
+}
+	
+}
+
+
+//================== *Cancel class ends* ============================//
 		
 ?>

@@ -55,15 +55,6 @@
                                 </ul>
                             </li>
 
-
-                            <!-- <li>
-                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Session-Subjects</span><span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level collapse">                               
-                                    <li><a href="<.?=$base?>/session/add_session.php">Assign Session Subjects</a></li>
-                                    <li><a href="<.?=$base?>/session/session_list.php">Edit Session Subjects</a></li>
-                                </ul>
-                            </li> -->
-
                             <li>
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Assign Teacher</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
@@ -75,6 +66,7 @@
                             <?php 
                             
                             // ADMIN PART ENDS //
+
                             //=================//
 
 
@@ -82,12 +74,38 @@
                             elseif($_SESSION['user_type'] == 2) : ?>
 
                             <li>
-                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage Class</span><span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage Classes</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
-                                    <li><a href="<?=$base?>/teacher/assign_teacher.php">Assign Class</a></li>
-                                    <li><a href="<?=$base?>/teacher/assign_teacher_list.php">Assgined Class List</a></li>
+                                    <li><a href="<?=$base?>/class/assigned_subject_list.php">Assigned Class List</a></li>
+
+                                    <!-- <li><a href="<?=$base?>/class/assigned_subject_list.php">Course Outline List</a></li> -->
                                 </ul>
                             </li>
+                            
+                            <!-- <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage Course Outline</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">                               
+                                    <li><a href="<?=$base?>/course_outline/course_outline.php">Add Course Outline</a></li>
+                                    <li><a href="<?=$base?>/course_outline/course_outline_list.php">Course Outline List</a></li>
+                                </ul>
+                            </li>
+
+
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Course Outline(Class)</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">                               
+                                    <li><a href="<?=$base?>/class/assign_topics.php">Class Wise Topics</a></li>
+                                    <li><a href="<?=$base?>/class/assign_topics_list.php">Class Wise Topics List</a></li>
+                                </ul>
+                            </li> -->
+
+                            <!-- <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Assign Topics</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">                               
+                                    <li><a href="</?=$base?>/class/assign_topics.php">Student Review Class</a></li>
+                                    <li><a href="</?=$base?>/class/assign_topics_list.php">Review List</a></li>
+                                </ul>
+                            </li> -->
                             
 
                             <?php 
@@ -97,11 +115,20 @@
                             // THIS PART FOR STUDENTS  //
                             elseif($_SESSION['user_type'] == 3) : ?>
 
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Assign Topics</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">                               
+                                    <li><a href="<?=$base?>/class/assign_topics.php">Review Class</a></li>
+                                    <li><a href="<?=$base?>/class/assign_topics_list.php">Review Class List</a></li>
+                                </ul>
+                            </li>
+
 
                             <?php 
                             
                             // STUDENTS PART ENDS //
                             //=================//
+
 
                             endif; ?>
 
