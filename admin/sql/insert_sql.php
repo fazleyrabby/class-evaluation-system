@@ -97,7 +97,7 @@ elseif(isset($_POST['add_session']))
 
 	if ($conn->query($sql) === TRUE) 
 	{
-		$_SESSION['alert'] = "New Subject Added Successfully!";
+		$_SESSION['alert'] = "New Session Added Successfully!";
 		header('location: ../session/session_list.php');
 	}
 
@@ -113,6 +113,43 @@ elseif(isset($_POST['add_session']))
 
 
 
+
+//================== *Add Semester Starts* ============================//
+
+elseif(isset($_POST['add_semester']))
+{
+	$semester_name=$_POST['semester_name'];
+	$semester_no=$_POST['semester_no'];
+
+	$check_exist = "SELECT * from semester where semester_no=$semester_no and status=1";
+
+	$result = $conn->query($check_exist);
+
+	if($result->num_rows == 0){
+		$sql = "INSERT INTO semester (semester_no,semester_name,created_at) VALUES ('$semester_no','$semester_name',now())";
+
+		if ($conn->query($sql) === TRUE)
+		{
+			$_SESSION['alert'] = "New Semester Added Successfully!";
+			header('location: ../semester/semester_list.php');
+		}
+
+		else
+		{
+			$_SESSION['alert'] = "Error Occured!";
+			header('location: ../semester/add_semester.php');
+		}
+	}
+	else{
+		$_SESSION['alert'] = "Semester Already Exists!";
+		header('location: ../semester/add_semester.php');
+	}
+
+
+
+}
+
+//================== *Add Semester Ends* ============================//
 
 
 
@@ -399,18 +436,47 @@ elseif(isset($_POST['add_course_outline']))
 }
 
 
-
-
-
-
-
 //================== *Add No of class ends* ============================//
 
 
 
 
 
+//================== *Add No of class starts* ============================//
 
+
+
+
+elseif(isset($_POST['add_course_outline_daily'])) 
+{
+	$class_no=$_POST['number_of_class'];
+	$course_outline=mysqli_real_escape_string($conn,$_POST['course_outline']);
+	$assign_class_id=$_POST['assign_class_id'];
+
+
+	$sql = "INSERT INTO daily_class_lecture(assign_class_id,class_no,course_outline,created_at) VALUES ($assign_class_id,$class_no,'$course_outline',now())";
+
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "Class Outline added succesfully!";
+		header('location: ../course_outline/daily_class_lecture.php?id='.$assign_class_id.'');
+	}
+
+	else
+	{		
+			mysqli_error($conn);	
+			exit;
+			$_SESSION['alert'] = "Error Occured!";
+			header('location: ../course_outline/daily_class_lecture.php?id='.$assign_class_id.'');
+	}	
+
+
+}
+
+
+
+
+//================== *Add No of class ends* ============================//
 
 
 

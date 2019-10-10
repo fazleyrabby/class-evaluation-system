@@ -61,5 +61,51 @@ if($delete == 'delete_section') {
 
 //================== *Delete section Ends* ============================//
 
+//================== *Delete Course Outline Topic* ============================//
+
+
+if($delete == 'delete_section') {
+
+  $sql = "UPDATE course_outline SET status=0 WHERE id=$id";
+
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "section Deleted Successfully!";
+		header('location: ../section/section_list.php');
+	}
+
+	else
+	{			
+			$_SESSION['alert'] = "Error Occured!";
+			header('location: ../section/section_list.php');
+  }	
+  
+}
+
+//================== *Delete Course Outline Topic* ============================//
+
+    //================== *Delete Course Outline Topic* ============================//
+
+
+    if($delete == 'delete_semester') {
+
+        $sql = "UPDATE semester SET status=0 WHERE id=$id";
+
+        if ($conn->query($sql) === TRUE)
+        {
+            $_SESSION['alert'] = "section Deleted Successfully!";
+            header('location: ../semester/semester_list.php');
+        }
+
+        else
+        {
+            $_SESSION['alert'] = "Error Occured!";
+            header('location: ../semester/semester_list.php');
+        }
+
+    }
+
+//================== *Delete Course Outline Topic* ============================//
+
 }
 ?>

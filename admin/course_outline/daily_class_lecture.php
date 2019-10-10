@@ -48,7 +48,7 @@
 
                                     
                                     <div class="panel-heading">
-                                      <h5>Assign new class outline</h5>
+                                      <h5>ASSIGN NEW CLASS OUTLINE (Daily)</h5>
                                     </div>
                                     <div class="panel-body">
 
@@ -133,7 +133,7 @@
                                             <!-- <input type="number"  name="total_class_number" placeholder="Enter total number of class" class="form-control">  -->
                                             <select name="number_of_class" class="form-control" id="">
                                               <?php 
-                                              $sql2 = "SELECT class_no from course_outline where assign_class_id=$a_class_id and status = 1";
+                                              $sql2 = "SELECT class_no from daily_class_lecture where assign_class_id=$a_class_id and status = 1";
 
                                               $result2 = $conn->query($sql2);
                                               $options = '';
@@ -150,7 +150,6 @@
                                                   }
 
                                                 }
-                                                
                                               }
                                               // if class topic not added at all
                                               else{
@@ -179,7 +178,7 @@
                                           
                                             <div class="form-group">
                                                 <div class="col-lg-offset-3 col-lg-9">
-                                                    <input type="submit" class="btn btn-sm btn-primary" name="add_course_outline" value="submit">
+                                                    <input type="submit" class="btn btn-sm btn-primary" name="add_course_outline_daily" value="submit">
                                                 </div>
                                             </div>
 
@@ -206,7 +205,7 @@
                         <div class="row">
                         <div class="col-md-10 col-md-offset-1"><div class="panel panel-card margin-b-30 m-4">
                               <div class="panel-heading">
-                                      <h5>Class Outline List</h5>
+                                      <h5>CLASS OUTLINE LIST (Daily)</h5>
                                     </div>
                               <div class="panel-body">
                               <div class="table-responsive">
@@ -226,7 +225,7 @@
 
                                                 
                                                 $sql = "SELECT id,class_no, course_outline
-                                                from course_outline where assign_class_id = $a_class_id and status = 1";
+                                                from daily_class_lecture where assign_class_id = $a_class_id and status = 1";
                                                 $result = $conn->query($sql);
 
                                                 if ($result->num_rows > 0) {
@@ -238,7 +237,7 @@
                                                     <td><?php 
                                                     
                                                     echo substr($row['course_outline'], 0, 15)."....";?></td>
-                                                    <td>  <a href="update_course_outline.php?page_id=<?php echo $a_class_id;?>&&id=<?php echo $row['id'];?>"class="btn btn-info">
+                                                    <td>  <a href="update_course_outline_daily.php?page_id=<?php echo $a_class_id;?>&&id=<?php echo $row['id'];?>"class="btn btn-info">
                                                         Edit
                                                      </a></td>
                                                 </tr>

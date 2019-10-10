@@ -30,7 +30,7 @@
                             <div class="col-sm-12">
                                 <div class="page-title">
                                     <div class="row">
-                                        <h4 class="pull-left">Add class</h4>
+                                        <h4 class="pull-left">Add Semester</h4>
                                     </div>
                                 </div>
                             </div>
@@ -46,31 +46,47 @@
                                 <div class="panel panel-card margin-b-30">
                                     <!-- Start .panel -->
                                     <div class="panel-heading">
-                                      Add class Form
+                                      Add Semester Form
                                     </div>
                                     <div class="panel-body">
 
-                                        <!-- form -->
+                                    <!-- form -->
                                     <form class="form-horizontal" method="post" action="<?=$base?>/sql/insert_sql.php">
-                                         
+                                         <div class="form-group">
+                                            <label class="col-lg-3 control-label">Semester</label>
+                                            <div class="col-lg-9">
+
+                                            <select class="form-control" name="semester_no" id="">
+                                                <option value="">Select</option>
+                                                <?php
+                                                    for ($i=1; $i<=8; $i++){
+                                                        echo '<option value="'.$i.'">'.$i.'</option>';
+                                                    }
+                                                ?>
+                                            </select>
+                                            </div> 
+                                            
+                                            </div>
+
                                             <div class="form-group">
 
-                                                <label class="col-lg-3 control-label">class Name
+                                                <label class="col-lg-3 control-label">Semester Title
                                                 </label>
 
-                                            <div class="col-lg-9">
-                                                <input type="text" name="class_name" placeholder="class Name" class="form-control">
-                                            </div>
+                                                <div class="col-lg-9">
+                                                    <input type="text" name="semester_name" placeholder="Example: 2nd Semester" class="form-control">
+                                                </div>
 
                                             </div>
+
+                                      
                                           
                                             <div class="form-group">
-                                                <div class="col-lg-offset-3 col-lg-9">
-                                                    <input type="submit" class="btn btn-sm btn-primary" name="add_class" value="submit">
+                                                <div class="col-lg-offset-2 col-lg-10">
+                                                    <input type="submit" class="btn btn-sm btn-primary" name="add_semester" value="submit">
                                                
                                                 </div>
                                             </div>
-
                                         </form>
                                         <!-- form -->
 
@@ -103,11 +119,6 @@
 
     <!-- JAVASCRIPT FILES -->
           <?php include('../includes/footer_link.php');?>
-
-          <script>
-          $('.select2').select2();
-          
-          </script>
 
     </body>
 </html>

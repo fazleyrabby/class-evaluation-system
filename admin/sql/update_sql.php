@@ -52,7 +52,7 @@ if(isset($_POST['update_session']))
 	if ($conn->query($sql) === TRUE) 
 	{
 		$_SESSION['alert'] = "Session Updated Successfully!";
-		header('location: ../session/session_list.php');
+		header('location: ../session/semester_list.php');
 	}
 
 	else
@@ -104,8 +104,9 @@ if(isset($_GET['status']) && isset($_GET['id']) && isset($_GET['type']))
 {
 	$id=$_GET['id'];
 	$status=$_GET['status'];
-	$type=$_GET['type'];  
-	//check if student or teacher
+	$type=$_GET['type'];
+
+  //check if student or teacher
   if ($type == 2) {
 		$member_type = "teacher";
 	}
@@ -280,6 +281,7 @@ elseif(isset($_POST['update_assign_teacher']))
 
 
 //================== *Update student Start* ============================//
+
 if (isset($_POST['update_student'])) 
 {
 $login_id = $_POST['login_id'];
@@ -366,6 +368,54 @@ if(isset($_POST['update_section']))
 
 //================== *Update section Ends* ============================//
 
+
+
+
+
+
+
+//================== *Update Semester Starts* ============================//
+
+elseif(isset($_POST['update_semester']))
+{
+    $semester_name=$_POST['semester_name'];
+    $id=$_POST['id'];
+
+
+    $sql = "UPDATE semester SET semester_name='$semester_name' WHERE id=$id";
+
+    //$sql = "INSERT INTO semester (semester_no,semester_name,year,created_at) VALUES ('$semester_no','$semester_name',now())";
+
+    if ($conn->query($sql) === TRUE)
+    {
+        $_SESSION['alert'] = "Updated Successfully!";
+        header('location: ../semester/semester_list.php');
+    }
+
+    else
+    {
+        $_SESSION['alert'] = "Error Occured!";
+        header('location: ../semester/update_semester.php?id='.$id.'');
+    }
+
+}
+
+//================== *Update Semester Ends* ============================//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //================== *Update No of class starts* ============================//
 
 
@@ -425,4 +475,59 @@ if ($_GET['class_status'] == 'cancel')
 
 //================== *Cancel class ends* ============================//
 		
+//================== *update course outline starts* ============================//
+
+elseif(isset($_POST['update_course_outline'])) 
+{
+
+	$class_no_id=$_POST['class_no_id'];
+	$course_outline=mysqli_real_escape_string($conn,$_POST['course_outline']);
+	$sql = "UPDATE course_outline SET course_outline='$course_outline' WHERE id=$class_no_id";
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "Successfully Canceled!";
+		header('location: ../course_outline/update_course_outline.php?id='.$class_no_id.'');
+	}
+
+	else
+	{			
+		$_SESSION['alert'] = "Error Occured";
+		header('location: ../course_outline/update_course_outline.php?id='.$class_no_id.'');
+	}	
+
+
+	
+}
+
+
+//================== *update course outline  ends* ============================//
+//================== *update course outline starts* ============================//
+
+elseif(isset($_POST['update_course_outline_daily'])) 
+{
+
+	$class_no_id=$_POST['class_no_id'];
+	$course_outline=mysqli_real_escape_string($conn,$_POST['course_outline']);
+
+	$sql = "UPDATE daily_class_lecture SET course_outline='$course_outline' WHERE id=$class_no_id";
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "Successfully Updated!";
+		header('location: ../course_outline/update_course_outline_daily.php?id='.$class_no_id.'');
+	}
+
+	else
+	{			
+		$_SESSION['alert'] = "Error Occured";
+		header('location: ../course_outline/update_course_outline_daily.php?id='.$class_no_id.'');
+	}	
+
+
+	
+}
+
+
+//================== *update course outline  ends* ============================//
+
+
 ?>

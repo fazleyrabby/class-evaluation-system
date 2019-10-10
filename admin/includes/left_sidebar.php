@@ -34,19 +34,26 @@
                             </li>
 
                             <li>
-                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage  Section</span><span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage Section</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
                                     <li><a href="<?=$base?>/section/add_section.php">Add Section</a></li>
                                     <li><a href="<?=$base?>/section/section_list.php">Section List</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage  Session</span><span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage Semester</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
-                                    <li><a href="<?=$base?>/session/add_session.php">Add Session</a></li>
-                                    <li><a href="<?=$base?>/session/session_list.php">Session List</a></li>
+                                    <li><a href="<?=$base?>/semester/add_semester.php">Add Semester</a></li>
+                                    <li><a href="<?=$base?>/semester/semester_list.php">Semester List</a></li>
                                 </ul>
                             </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage  Session</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li><a href="<?=$base?>/session/add_session.php">Add Session</a></li>
+                                        <li><a href="<?=$base?>/session/session_list.php">Session List</a></li>
+                                    </ul>
+                                </li>
                             <li>
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage Department</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
@@ -82,15 +89,15 @@
                                 </ul>
                             </li>
                             
-                            <!-- <li>
-                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Manage Course Outline</span><span class="fa arrow"></span></a>
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Daily Course Outline</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
-                                    <li><a href="<?=$base?>/course_outline/course_outline.php">Add Course Outline</a></li>
+                                    <li><a href="<?=$base?>/course_outline/daily_course_list.php">Add Daily Course Outline</a></li>
                                     <li><a href="<?=$base?>/course_outline/course_outline_list.php">Course Outline List</a></li>
                                 </ul>
                             </li>
 
-
+                        <!-- 
                             <li>
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Course Outline(Class)</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
