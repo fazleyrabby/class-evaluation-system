@@ -62,6 +62,36 @@
                                                 ?>
                                           
                                           <input type="hidden" name="id" value="<?=$id?>">
+
+                                            <div class="form-group">
+                                                <label class="col-lg-3 control-label">Semester</label>
+                                                <div class="col-lg-9">
+                                                    <select class="form-control form-control-sm" name="semester">
+                                                        <option>Select Semester</option>
+                                                        <?php
+                                                        $sql2 = "SELECT * from semester where status = 1";
+                                                        $query2 = $conn->query($sql2);
+                                                        $row2 = $query2->num_rows;
+                                                        if ($row2 > 0) {
+                                                            while ($data2 = $query2->fetch_assoc()){
+
+                                                                $id = $data2['id'];
+                                                                $name = $data2['semester_name'];
+
+                                                                if ($row['semester'] == $id) {
+                                                                    $select = "selected";
+                                                                }
+                                                                else{
+                                                                    $select = "";
+                                                                }
+
+                                                                echo "<option value='$id' $select>$name</option>";
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                                 
                                          <div class="form-group">
                                             <label class="col-lg-3 control-label">Subject Id:</label>

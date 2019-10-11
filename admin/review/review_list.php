@@ -27,12 +27,12 @@
                             <div class="col-sm-12">
                                 <div class="page-title">
                                     <div class="row">
-                                        <h4 class="pull-left">Data Tables</h4>
+                                        <!-- <h4 class="pull-left">Assgined Teacher List</h4> -->
                                     </div>
                                 </div>
                             </div>
                         </div><!-- end .page title-->
-                         <div><?php
+                        <div><?php
                         if(isset($_SESSION['alert'])){
                         echo '<div class="alert alert-danger alert-dismissible"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$_SESSION['alert'].'</div>';
                         unset($_SESSION['alert']);
@@ -44,30 +44,49 @@
                                 <div class="panel panel-card recent-activites">
                                     <!-- Start .panel -->
                                     <div class="panel-heading">
-                                       Subject List
+                                    Teacher List
                                     </div>
                                     <div class="panel-body">
                                         <div class="table-responsive">
                                             <table id="basic-datatables" class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th> Subject ID</th>
-                                                        <th> Semester</th>
-                                                        <th> Subject Name</th>
-                                                        <th> Action</th>
+                                                        <th> Teacher ID </th>
+                                                        <th> Teacher Name </th>
+                                                        <th> Session </th>
+                                                        <th> Section </th>
+                                                        <th> Subject </th>
+                                                        <th> Class Details </th>
                                                     </tr>
                                                 </thead>
                                                
                                                 <tbody>
                                                      
                                                 <?php 
-                                                $sql = "SELECT subject.*,semester_name from 
-                                                subject 
-                                                left join semester 
-                                                on semester.id=subject.semester
-                                                where subject.status = 1
-                                                order by subject.semester asc
-                                                ";
+                                                $sql = "SELECT 
+                                                assign_teacher.id as id,
+                                                assign_teacher.status as status,
+                                                assign_teacher.teacher_id as teacher_id,
+                                                session.session_name as session,
+                                                session.year as year,
+                                                section.section_name as section_name,
+                                                teacher.name as teacher_name,
+                                                subject.subject_name as subject
+                                                from 
+                                                    assign_teacher 
+                                                left join 
+                                                    teacher on assign_teacher.teacher_id = teacher.teacher_id
+                                                left join 
+                                                    subject on subject.id=
+                                                    assign_teacher.subject_id
+                                                left join 
+                                                    section on
+                                                    section.id=assign_teacher.section_id
+                                                left join 
+                                                    session on  
+                                                    session.id=assign_teacher.session_id
+                                                where assign_teacher.status = 2    
+                                                    ";
 
                                                 $result = $conn->query($sql);
 
@@ -75,22 +94,22 @@
                                                 while($row = $result->fetch_assoc()) { ?>
 
                                                 <tr>
-                                                    <td><?php echo $row['subject_id'];?></td>
-                                                    <td><?php echo $row['semester_name'];?></td>
-                                                    <td><?php echo $row['subject_name'];?></td>
-                                                         
+                                                    <td><?php echo $row['teacher_id'];?></td>
+                                                    <td><?php echo $row['teacher_name'];?></td>
+                                                    <td><?php echo "(".$row['year'].") ".$row['session']?></td>
+                                                    <td><?php echo $row['section_name']?></td>
+                                                    <td><?php echo $row['subject'];?></td>
 
-                                                    <td class="text-center">
-                                                        <a href="update_subject.php?id=<?php echo $row['id']?>"class="btn btn-success">
-                                                        <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                        <a onclick="return confirm('Are you sure want to delete')" href="<?=$base?>/sql/delete_sql.php?delete=delete_subject&&id=<?php echo $row['id']?>" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Delete">
-                                                            <i class="fa fa-trash-o"></i>
-                                                        </a>
+                                                    <td>
+                                                    <a href="subject_wise_class_list.php?id=<?php echo $row['id']?>"class="btn btn-success">
+                                                        Class Details
+                                                        </a> 
                                                     </td>
+
+                                                    
                                                 </tr>
 
-                                                    <?php } } ?>
+                                                <?php } } ?>
 
 
                                                 </tbody>
@@ -124,9 +143,8 @@
         </div><!-- /PRELOADER -->
 
         <!-- JAVASCRIPT FILES -->
+
       <?php include('../includes/footer_link.php');?>
-
-
    
     </body>
 </html>

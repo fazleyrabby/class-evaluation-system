@@ -59,7 +59,7 @@
                                     
                                           if(isset($_GET['id'])){
 
-                                            $ast_id = $_GET['id'];
+                                          $ast_id = $_GET['id'];
                                           
                                           $sql = "SELECT teacher.name as name,
                                           section.section_name as section,
@@ -76,7 +76,7 @@
                                           left join subject
                                           on subject.id=ast.subject_id
                                           where ast.id=$ast_id
-                                          and ast.status=1";
+                                          and ast.status!=0";
                                           $query=$conn->query($sql);
                                           if($query->num_rows > 0) {
                                               while($data = $query->fetch_assoc()){

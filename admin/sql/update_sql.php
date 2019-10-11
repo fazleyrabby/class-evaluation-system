@@ -11,10 +11,11 @@ if(isset($_POST['update_subject']))
 	$id=$_POST['id'];
 	$subject_id=$_POST['subject_id'];
 	$subject_name=$_POST['subject_name'];
+    $semester = $_POST['semester'];
 
 
 
-	$sql = "UPDATE subject SET subject_id='$subject_id', subject_name='$subject_name' WHERE id=$id";
+	$sql = "UPDATE subject SET subject_id='$subject_id',semester = $semester, subject_name='$subject_name' WHERE id=$id";
 
 	if ($conn->query($sql) === TRUE) 
 	{
@@ -289,6 +290,7 @@ $student_f_id = $_POST['student_f_id'];
 $student_id=$_POST['student_id'];
 $name=$_POST['name'];
 $email=$_POST['email'];
+$semester=$_POST['semester'];
 $username=$_POST['username'];
 $department=$_POST['department'];
 $section=$_POST['section'];
@@ -307,7 +309,7 @@ if ($conn->query($login) === TRUE)
 {
 		// $last_id = $conn->insert_id;
 		//FOR REGISTRATION FORM//
-		$reg = "UPDATE registration set name='$name',section='$section',department='$department',member_id='$student_id' where login_id=$login_id";
+		$reg = "UPDATE registration set name='$name',semester=$semester,section='$section',department='$department',member_id='$student_id' where login_id=$login_id";
 
 		//FOR teacher table
 		$student = "UPDATE student set name='$name',student_id='$student_id' where id=$student_f_id";
@@ -448,17 +450,26 @@ elseif(isset($_POST['update_no_of_class']))
 
 //================== *Update No of class ends* ============================//
 
-//================== *Cancel class starts* ============================//
+//================== *status of class starts* ============================//
 
 elseif(isset($_GET['class_status']) && isset($_GET['id'])) 
 {
+
 if ($_GET['class_status'] == 'cancel') 
 {
+	$status = 0;
+	$msg = 'Successfully Canceled!';
+}
+elseif($_GET['class_status'] == 'accept'){
+	$status = 2;
+	$msg = 'Successfully Accepted!';
+}
+
 	$id=$_GET['id'];
-	$sql = "UPDATE assign_teacher SET status=0 WHERE id=$id";
+	$sql = "UPDATE assign_teacher SET status=$status WHERE id=$id";
 	if ($conn->query($sql) === TRUE) 
 	{
-		$_SESSION['alert'] = "Successfully Canceled!";
+		$_SESSION['alert'] = "$msg";
 		header('location: ../class/assigned_subject_list.php');
 	}
 
@@ -468,12 +479,12 @@ if ($_GET['class_status'] == 'cancel')
 		header('location: ../class/assigned_subject_list.php');
 	}	
 
-}
+
 	
 }
 
 
-//================== *Cancel class ends* ============================//
+//================== *status of class ends* ============================//
 		
 //================== *update course outline starts* ============================//
 
@@ -485,7 +496,7 @@ elseif(isset($_POST['update_course_outline']))
 	$sql = "UPDATE course_outline SET course_outline='$course_outline' WHERE id=$class_no_id";
 	if ($conn->query($sql) === TRUE) 
 	{
-		$_SESSION['alert'] = "Successfully Canceled!";
+		$_SESSION['alert'] = "Successfully Updated!";
 		header('location: ../course_outline/update_course_outline.php?id='.$class_no_id.'');
 	}
 
@@ -501,7 +512,8 @@ elseif(isset($_POST['update_course_outline']))
 
 
 //================== *update course outline  ends* ============================//
-//================== *update course outline starts* ============================//
+
+//================== *update course outline daily starts* ============================//
 
 elseif(isset($_POST['update_course_outline_daily'])) 
 {
@@ -527,7 +539,44 @@ elseif(isset($_POST['update_course_outline_daily']))
 }
 
 
-//================== *update course outline  ends* ============================//
+//================== *update course outline daily ends* ============================//
 
+
+//================== *update Student Review Starts* ============================//
+
+elseif(isset($_POST['update_review'])) 
+{
+	// print_r($_POST);
+	// exit;
+	$edit_id = $_POST['edit_id'];
+	$id = $_POST['daily_class_lecture_id'];
+	$comment=mysqli_real_escape_string($conn,$_POST['comment']);
+	// $student_id=$_POST['student_id'];
+	$page_id=$_POST['page_id'];
+
+
+
+
+	$sql = "UPDATE class_review set comment='$comment' where id=$edit_id";
+
+	if ($conn->query($sql) === TRUE) 
+	{
+		$_SESSION['alert'] = "Your Review Successfully Updated!";
+		header('location: ../review/daily_class_review.php?ast_id='.$page_id.'');
+	}
+
+	else
+	{		echo mysqli_error($conn);
+		exit;
+			$_SESSION['alert'] = "Error Occured!";
+			header('location: ../review/update_review.php?ast_id='.$page_id.'&&id='.$id.'&&edit_id='.$edit_id.'');
+	}	
+
+
+
+
+}
+
+//================== *update Student Review Ends* ============================//
 
 ?>

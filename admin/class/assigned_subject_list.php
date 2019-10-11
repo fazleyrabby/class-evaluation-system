@@ -72,6 +72,7 @@
                                                 a_class.number_of_class as number_of_class,
                                                 a_class.id as a_class_id,
                                                 ast.id as id,
+                                                ast.status as ast_status,
                                                 teacher.name as name,
                                                 section.section_name as section,
                                                 session.session_name as session,
@@ -102,23 +103,44 @@
                                                     <td class="text-center"><?php echo $row['section'];?></td>
                                                     <td class="text-center"><?php echo $row['number_of_class'] == '' ?'<h5 class="text-center">--</h5>' : $row['number_of_class'] ;?></td>
                                                     
-                                                    <?php if($row['number_of_class'] == '') : ?>
+                                                    
                                                     <td>
-                                                        <a onclick="return confirm('Are you sure want to cancel?')" href="<?=$base?>/sql/update_sql.php?class_status=cancel&&id=<?php echo $row['id']?>"class="btn btn-info">
+                                                    <?php if($row['ast_status'] == 1) : ?>
+                                                        <a onclick="return confirm('Are you sure want to cancel?')" href="<?=$base?>/sql/update_sql.php?class_status=cancel&&id=<?php echo $row['id']?>"class="btn btn-danger">
                                                         Cancel this subject
                                                         </a>
+                                                       
                                                         
+                                                        <a onclick="return confirm('You will take this class?')" href="<?=$base?>/sql/update_sql.php?class_status=accept&&id=<?php echo $row['id']?>"class="btn btn-info">
+                                                        Accept
+                                                        </a>
+                                                    
+
+                                                    <?php elseif($row['ast_status'] == 2) : ?>
+
                                                         <a href="assign_class.php?id=<?php echo $row['id']?>"class="btn btn-success">
-                                                       Assign No. Of Class
+                                                        Assign No. Of Class
                                                         </a>
+
+                                                        <?php if($row['number_of_class'] != '') : ?>
+                                                            <a href="update_class.php?id=<?php echo $row['a_class_id']?>"class="btn btn-info">
+                                                            Update No. Of Class
+                                                            </a>
+                                                        <?php endif;?>
+                                                    <?php endif;?>
+
                                                     </td>
+
+                                              
+
+                                                    <?php if($row['number_of_class'] == '') : ?>
+
                                                     <td class="text-center"> <h5>--</h5> </td>
-                                                    <?php else:?>
-                                                    <td>    
-                                                        <a href="update_class.php?id=<?php echo $row['a_class_id']?>"class="btn btn-info">
-                                                        Update No. Of Class
-                                                        </a>
-                                                    </td>
+
+                                                    <?php else: ?>
+                                                    <!-- <td>    
+                                                        
+                                                    </td> -->
                                                     <td> 
                                                         <a href="<?=$base?>/course_outline/assign_course_outline.php?id=<?php echo $row['a_class_id']?>"class="btn btn-info">
                                                           Assign Course Outline

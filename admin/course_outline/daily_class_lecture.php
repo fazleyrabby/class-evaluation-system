@@ -110,7 +110,8 @@
                                             <label class="col-lg-3 control-label">Subject Name
                                             </label>
                                             <div class="col-lg-9">
-                                            <?=$subject;?>
+                                            <?=$subject;?> 
+                                            
                                             <!-- <input type="text" name="session" placeholder="Class Name" class="form-control">  -->
                                             </div>
                                             </div>

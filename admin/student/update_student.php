@@ -63,6 +63,7 @@
                                         registration.member_id as student_id,
                                         registration.name as name,
                                         registration.email as email,
+                                        registration.semester as semester,
                                         registration.department as dept,
                                         registration.section as section,
                                         login.username as username,
@@ -157,6 +158,37 @@
                                                     ?>
                                                     </select>
                                                 </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Semester</label>
+                                            <div class="col-lg-9">
+                                                <select class="form-control form-control-sm" name="section">
+                                                    <option>Select Semester</option>
+                                                    <?php
+                                                    $sql = "SELECT * from semester where status = 1";
+                                                    $query = $conn->query($sql);
+                                                    $row = $query->num_rows;
+                                                    if ($row > 0) {
+                                                        while ($data = $query->fetch_assoc()){
+
+                                                            $id = $data['id'];
+                                                            $name = $data['semester_name'];
+
+                                                            if ($t_data['semester'] == $id) {
+                                                                $select = "selected";
+                                                            }
+                                                            else{
+                                                                $select = "";
+                                                            }
+
+                                                            echo "<option value='$id' $select>$name</option>";
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
 
 

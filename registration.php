@@ -103,7 +103,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-hand-o-up"></i></span>
                             <select class="form-control form-control-sm" name="section">
-                              <option>Select Section</option>
+                              <option>Select Section (Only For Student)</option>
                               <?php
                                 $sql = "SELECT * from section where status = 1";
 
@@ -125,6 +125,29 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-hand-o-up"></i></span>
+                            <select class="form-control form-control-sm" name="department">
+                                <option>Select Semester (Only For Student)</option>
+                                <?php
+                                $sql = "SELECT * from semester where status = 1";
+                                $query = $conn->query($sql);
+                                $row = $query->num_rows;
+                                if ($row > 0) {
+                                    while ($data = $query->fetch_assoc()){
+                                        $id = $data['id'];
+                                        $name = $data['semester_name'];
+                                        echo "<option value=$id>$name</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+
          
                     
              

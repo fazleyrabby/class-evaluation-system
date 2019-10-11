@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2019 at 09:03 PM
+-- Generation Time: Oct 11, 2019 at 10:19 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -42,7 +42,11 @@ CREATE TABLE `assign_class` (
 
 INSERT INTO `assign_class` (`id`, `assign_teacher_id`, `number_of_class`, `created_at`, `updated_at`) VALUES
 (1, 2, 12, '2019-10-08 11:55:26', '2019-10-08 05:55:26'),
-(2, 6, 5, '2019-10-08 23:12:25', '2019-10-08 17:12:25');
+(2, 6, 5, '2019-10-08 23:12:25', '2019-10-08 17:12:25'),
+(3, 7, 7, '2019-10-09 21:38:31', '2019-10-09 15:38:31'),
+(5, 4, 6, '2019-10-11 21:46:50', '2019-10-11 15:46:50'),
+(6, 1, 6, '2019-10-12 00:30:08', '2019-10-11 18:30:08'),
+(7, 5, 7, '2019-10-12 00:30:13', '2019-10-11 18:30:13');
 
 -- --------------------------------------------------------
 
@@ -66,13 +70,13 @@ CREATE TABLE `assign_teacher` (
 --
 
 INSERT INTO `assign_teacher` (`id`, `teacher_id`, `session_id`, `subject_id`, `section_id`, `status`, `created_at`, `udpated_at`) VALUES
-(1, 'CSET1234567890', 1, 6, 1, 1, '2019-09-07 00:09:49', '2019-09-06 18:09:49'),
+(1, 'CSET1234567890', 1, 6, 1, 2, '2019-09-07 00:09:49', '2019-09-06 18:09:49'),
 (2, 'EEET0987654321', 1, 6, 2, 2, '2019-09-10 20:45:35', '2019-09-10 14:45:35'),
 (3, 'CSET0987654321', 2, 4, 1, 1, '2019-09-10 21:44:43', '2019-09-10 15:44:43'),
-(4, 'EEE0989898777', 4, 4, 2, 1, '2019-09-17 20:43:40', '2019-09-17 14:43:40'),
-(5, 'CSET1234567890', 2, 3, 2, 1, '2019-09-28 01:17:54', '2019-09-27 19:17:54'),
-(6, 'EEET0987654321', 3, 2, 1, 1, '2019-09-30 22:20:39', '2019-09-30 16:20:39'),
-(7, 'EEET0987654321', 4, 1, 1, 1, '2019-10-08 23:11:50', '2019-10-08 17:11:50');
+(4, 'EEE0989898777', 4, 4, 2, 2, '2019-09-17 20:43:40', '2019-09-17 14:43:40'),
+(5, 'CSET1234567890', 2, 3, 2, 2, '2019-09-28 01:17:54', '2019-09-27 19:17:54'),
+(6, 'EEET0987654321', 3, 2, 1, 2, '2019-09-30 22:20:39', '2019-09-30 16:20:39'),
+(7, 'EEET0987654321', 4, 1, 1, 2, '2019-10-08 23:11:50', '2019-10-08 17:11:50');
 
 -- --------------------------------------------------------
 
@@ -82,13 +86,25 @@ INSERT INTO `assign_teacher` (`id`, `teacher_id`, `session_id`, `subject_id`, `s
 
 CREATE TABLE `class_review` (
   `id` bigint(20) NOT NULL,
-  `class_topic_id` bigint(20) DEFAULT NULL COMMENT 'this id from class topic table',
+  `daily_class_lecture_id` int(11) DEFAULT NULL COMMENT 'this id from daily class lecture',
   `comment` longtext COLLATE utf8_unicode_ci,
-  `student_id` bigint(20) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `student_id` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `class_review`
+--
+
+INSERT INTO `class_review` (`id`, `daily_class_lecture_id`, `comment`, `student_id`, `status`, `created_at`, `updated_at`) VALUES
+(3, 10, 'good classs! sdasd', 'EEE0987654321', 1, '2019-10-11 23:46:06', NULL),
+(4, 3, 'Physics 1 class 1', 'EEE0987654321', 1, '2019-10-12 00:01:57', '2019-10-11 18:14:47'),
+(5, 4, 'Physics 1 class 2', 'EEE0987654321', 1, '2019-10-12 00:02:32', '2019-10-11 18:14:52'),
+(6, 5, 'Physics 1 class 3\r\n', 'EEE0987654321', 1, '2019-10-12 00:03:36', '2019-10-11 18:14:58'),
+(7, 6, 'Physics 1 class 4 done', 'EEE0987654321', 1, '2019-10-12 00:20:40', '2019-10-11 18:20:55'),
+(8, 11, 'learned new topics', 'CSE09999876', 1, '2019-10-12 00:32:13', '2019-10-11 18:32:13');
 
 -- --------------------------------------------------------
 
@@ -111,9 +127,20 @@ CREATE TABLE `course_outline` (
 --
 
 INSERT INTO `course_outline` (`id`, `assign_class_id`, `course_outline`, `class_no`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'asdasd', 1, 1, '2019-10-09 00:17:55', NULL),
-(2, 1, 'hey this is class 2', 2, 1, '2019-10-09 00:19:32', NULL),
-(3, 1, 'new topic for class 3', 3, 1, '2019-10-09 00:58:36', NULL);
+(1, 1, 'class 1\r\nmath done', 1, 1, '2019-10-09 00:17:55', NULL),
+(2, 1, 'hey this is class 2 \r\nmath done\r\n', 2, 1, '2019-10-09 00:19:32', NULL),
+(3, 1, 'new topic for class 3', 3, 0, '2019-10-09 00:58:36', NULL),
+(4, 1, 'class 3\r\nmath done', 3, 1, '2019-10-10 00:02:02', NULL),
+(5, 3, 'dsfdsf', 1, 1, '2019-10-10 00:22:40', NULL),
+(6, 1, 'dfsdfsdaf', 1, 0, '2019-10-10 01:47:16', NULL),
+(7, 2, 'fadsfsdf', 1, 1, '2019-10-11 20:59:11', NULL),
+(8, 2, 'sadfdsf', 2, 1, '2019-10-11 20:59:14', NULL),
+(9, 2, 'asdfasfdfa', 3, 1, '2019-10-11 20:59:17', NULL),
+(10, 2, 'sadfsfsd', 4, 1, '2019-10-11 20:59:19', NULL),
+(11, 2, 'asdfsdf', 5, 1, '2019-10-11 20:59:24', NULL),
+(12, 5, 'fdsdgdfgd', 1, 1, '2019-10-11 21:47:04', NULL),
+(13, 6, 'class 1 topics for Discrete Mathematics', 1, 1, '2019-10-12 00:30:27', NULL),
+(14, 7, 'class 1 topics for calculus', 1, 1, '2019-10-12 00:30:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -124,12 +151,30 @@ INSERT INTO `course_outline` (`id`, `assign_class_id`, `course_outline`, `class_
 CREATE TABLE `daily_class_lecture` (
   `id` int(11) NOT NULL,
   `assign_class_id` int(11) DEFAULT NULL COMMENT 'this id from assign class table',
-  `class_topic` longtext COLLATE utf8_unicode_ci,
-  `class_date` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `course_outline` longtext COLLATE utf8_unicode_ci,
+  `class_no` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '1',
   `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `daily_class_lecture`
+--
+
+INSERT INTO `daily_class_lecture` (`id`, `assign_class_id`, `course_outline`, `class_no`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'dfdsfsfdsgsadasdasd', 1, 1, '2019-10-10 01:48:38', '2019-10-09 19:52:31'),
+(2, 1, 'adaddadasdasdasasddasdd', 2, 1, '2019-10-10 01:52:40', '2019-10-09 19:52:44'),
+(3, 2, 'physics 1 class 1 done', 1, 1, '2019-10-10 01:52:51', '2019-10-11 18:28:29'),
+(4, 2, 'physics 1 class 2 done', 2, 1, '2019-10-10 01:52:56', '2019-10-11 18:28:38'),
+(5, 2, 'physics 1 class 3 done', 3, 1, '2019-10-10 01:52:58', '2019-10-11 18:28:47'),
+(6, 2, 'physics 1 class 4\r\n done', 4, 1, '2019-10-10 01:53:00', '2019-10-11 18:28:57'),
+(7, 1, 'gffdgdfgdf', 3, 1, '2019-10-10 01:54:31', '2019-10-09 19:55:11'),
+(8, 1, 'sdasddddsdasdasdasdasdssss', 4, 1, '2019-10-10 01:55:29', '2019-10-09 19:57:11'),
+(9, 1, 'rgfsdgdf', 5, 1, '2019-10-10 01:57:22', '2019-10-09 19:57:22'),
+(10, 3, 'Class one done ', 1, 1, '2019-10-10 01:57:31', '2019-10-11 18:27:59'),
+(11, 7, 'class 1 done by 50%', 1, 1, '2019-10-12 00:31:37', '2019-10-11 18:31:37'),
+(12, 6, 'Discrete Mathematics Class 1 done by 70%', 1, 1, '2019-10-12 00:31:55', '2019-10-11 18:31:55');
 
 -- --------------------------------------------------------
 
@@ -174,7 +219,7 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `user_type`, `username`, `password`, `created_at`, `updated_at`) VALUES
 (1, 1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', '2019-09-03 00:15:16', '2019-09-02 18:15:16'),
-(2, 2, 'tarek2019', 'e10adc3949ba59abbe56e057f20f883e', '2019-09-03 00:34:06', '2019-09-02 18:34:06'),
+(2, 2, 'tarek', 'e10adc3949ba59abbe56e057f20f883e', '2019-09-03 00:34:06', '2019-09-02 18:34:06'),
 (3, 2, 'saiful_islam', 'e10adc3949ba59abbe56e057f20f883e', '2019-09-10 17:14:26', '2019-09-10 11:14:26'),
 (4, 2, 'emam', 'e10adc3949ba59abbe56e057f20f883e', '2019-09-10 19:00:57', '2019-09-10 13:00:57'),
 (5, 2, 'kbahmed', 'e10adc3949ba59abbe56e057f20f883e', '2019-09-14 23:33:16', '2019-09-14 17:33:16'),
@@ -195,6 +240,7 @@ CREATE TABLE `registration` (
   `name` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `department` int(11) DEFAULT NULL,
   `section` int(11) DEFAULT NULL,
+  `semester` int(11) DEFAULT NULL,
   `authentication` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0=inactive/pending,1=active,2=rejected',
   `created_at` datetime DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
@@ -204,13 +250,13 @@ CREATE TABLE `registration` (
 -- Dumping data for table `registration`
 --
 
-INSERT INTO `registration` (`id`, `member_id`, `login_id`, `email`, `name`, `department`, `section`, `authentication`, `created_at`, `updated_at`) VALUES
-(1, 'CSET1234567890', 2, 'tarek2019@gmail.com', 'Md. Tarek Uddin', 1, 2, 1, '2019-09-03 00:34:08', '2019-09-02 18:34:08'),
-(2, 'CSET0987654321', 3, 's@gmail.com', 'Md. Saiful Islam', 2, 2, 1, '2019-09-10 17:14:26', '2019-09-10 11:14:26'),
-(3, 'EEET0987654321', 4, 'emam@gmail.com', 'Emam Hossain', 2, 1, 1, '2019-09-10 19:00:57', '2019-09-10 13:00:57'),
-(4, 'EEE0989898777', 5, 'kb@gmail.com', 'Kabir Ahmed', 1, 1, 1, '2019-09-14 23:33:16', '2019-09-14 17:33:16'),
-(7, 'CSE09999876', 8, 'naeem@gmail.com', 'Naeem Uddin', 1, 2, 1, '2019-09-17 20:11:49', '2019-09-17 14:11:49'),
-(9, 'EEE0987654321', 10, 'ashik@gmail.com', 'Ashikul Islam  ', 1, 1, 1, '2019-09-17 20:21:48', '2019-09-17 14:21:48');
+INSERT INTO `registration` (`id`, `member_id`, `login_id`, `email`, `name`, `department`, `section`, `semester`, `authentication`, `created_at`, `updated_at`) VALUES
+(1, 'CSET1234567890', 2, 'tarek2019@gmail.com', 'Md. Tarek Uddin', 1, 2, NULL, 1, '2019-09-03 00:34:08', '2019-09-02 18:34:08'),
+(2, 'CSET0987654321', 3, 's@gmail.com', 'Md. Saiful Islam', 2, 2, NULL, 1, '2019-09-10 17:14:26', '2019-09-10 11:14:26'),
+(3, 'EEET0987654321', 4, 'emam@gmail.com', 'Emam Hossain', 2, 1, NULL, 1, '2019-09-10 19:00:57', '2019-09-10 13:00:57'),
+(4, 'EEE0989898777', 5, 'kb@gmail.com', 'Kabir Ahmed', 1, 1, NULL, 1, '2019-09-14 23:33:16', '2019-09-14 17:33:16'),
+(7, 'CSE09999876', 8, 'naeem@gmail.com', 'Naeem Uddin', 1, 2, 1, 1, '2019-09-17 20:11:49', '2019-09-17 14:11:49'),
+(9, 'EEE0987654321', 10, 'ashik@gmail.com', 'Ashikul Islam  ', 1, 1, 1, 1, '2019-09-17 20:21:48', '2019-09-17 14:21:48');
 
 -- --------------------------------------------------------
 
@@ -233,6 +279,35 @@ CREATE TABLE `section` (
 INSERT INTO `section` (`id`, `section_name`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'A', 1, '2019-09-28 01:09:31', NULL),
 (2, 'B', 1, '2019-09-30 20:55:23', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `semester`
+--
+
+CREATE TABLE `semester` (
+  `id` int(11) NOT NULL,
+  `semester_no` int(11) DEFAULT NULL,
+  `semester_name` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '1',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `semester`
+--
+
+INSERT INTO `semester` (`id`, `semester_no`, `semester_name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, '1st Semester', 1, '2019-10-10 22:51:39', '2019-10-10 16:51:39'),
+(2, 2, '2nd Semester', 1, '2019-10-10 22:54:13', '2019-10-10 16:54:13'),
+(3, 3, '3rd Semester', 1, '2019-10-10 23:18:56', '2019-10-10 17:18:56'),
+(4, 4, '4th Semester', 1, '2019-10-10 23:19:04', '2019-10-10 17:19:04'),
+(5, 5, '5th Semester', 1, '2019-10-10 23:19:15', '2019-10-10 17:19:15'),
+(6, 6, '6th Semester', 1, '2019-10-10 23:19:23', '2019-10-10 17:19:23'),
+(7, 7, '7th Semester', 1, '2019-10-10 23:19:34', '2019-10-10 17:19:34'),
+(8, 8, '8th Semester', 1, '2019-10-10 23:19:42', '2019-10-10 17:19:42');
 
 -- --------------------------------------------------------
 
@@ -292,6 +367,7 @@ CREATE TABLE `subject` (
   `id` int(11) NOT NULL,
   `subject_id` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `subject_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `semester` int(11) DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1=active,0=inactive',
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -301,14 +377,14 @@ CREATE TABLE `subject` (
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`id`, `subject_id`, `subject_name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'CSE 111', 'Introduction of computer Science', 1, '2019-09-03 13:48:44', '2019-09-03 07:48:44'),
-(2, 'physics101', 'Physics 1', 1, '2019-09-03 18:23:37', '2019-09-03 12:23:37'),
-(3, 'MATH 111', 'Math-I (Differential Calculus & Co-ordinate Geom.)', 1, '2019-09-06 21:25:48', '2019-09-06 15:25:48'),
-(4, 'CSE 121', 'Structural Programming Language', 1, '2019-09-06 21:26:03', '2019-09-06 15:26:03'),
-(5, 'CSE 135', 'Object Oriented Programming', 1, '2019-09-06 21:26:20', '2019-09-06 15:26:20'),
-(6, 'CSE 215', 'Discrete Mathematics', 1, '2019-09-06 21:26:40', '2019-09-06 15:26:40'),
-(7, NULL, 'New', 0, '2019-09-06 22:33:00', '2019-09-06 16:33:00');
+INSERT INTO `subject` (`id`, `subject_id`, `subject_name`, `semester`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'CSE 111', 'Introduction of computer Science', 1, 1, '2019-09-03 13:48:44', '2019-09-03 07:48:44'),
+(2, 'physics101', 'Physics 1', 1, 1, '2019-09-03 18:23:37', '2019-09-03 12:23:37'),
+(3, 'MATH 111', 'Math-I (Differential Calculus & Co-ordinate Geom.)', 1, 1, '2019-09-06 21:25:48', '2019-09-06 15:25:48'),
+(4, 'CSE 121', 'Structural Programming Language', 1, 1, '2019-09-06 21:26:03', '2019-09-06 15:26:03'),
+(5, 'CSE 135', 'Object Oriented Programming', 1, 1, '2019-09-06 21:26:20', '2019-09-06 15:26:20'),
+(6, 'CSE 215', 'Discrete Mathematics', 2, 1, '2019-09-06 21:26:40', '2019-09-06 15:26:40'),
+(7, 'MATH 211', 'Calculus ', 2, 1, '2019-09-06 22:33:00', '2019-09-06 16:33:00');
 
 -- --------------------------------------------------------
 
@@ -394,6 +470,12 @@ ALTER TABLE `section`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `semester`
+--
+ALTER TABLE `semester`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `session`
 --
 ALTER TABLE `session`
@@ -425,7 +507,7 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `assign_class`
 --
 ALTER TABLE `assign_class`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `assign_teacher`
@@ -437,19 +519,19 @@ ALTER TABLE `assign_teacher`
 -- AUTO_INCREMENT for table `class_review`
 --
 ALTER TABLE `class_review`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `course_outline`
 --
 ALTER TABLE `course_outline`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `daily_class_lecture`
 --
 ALTER TABLE `daily_class_lecture`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -474,6 +556,12 @@ ALTER TABLE `registration`
 --
 ALTER TABLE `section`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `semester`
+--
+ALTER TABLE `semester`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `session`

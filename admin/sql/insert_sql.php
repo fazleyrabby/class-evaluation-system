@@ -64,8 +64,9 @@ elseif(isset($_POST['add_subject']))
 {
 	$subject_id=$_POST['subject_id'];
 	$subject_name=$_POST['subject_name'];
+	$semester=$_POST['semester'];
 
-	$sql = "INSERT INTO subject(subject_id,subject_name,created_at) VALUES ('$subject_id','$subject_name',now())";
+	$sql = "INSERT INTO subject(subject_id,semester,subject_name,created_at) VALUES ('$subject_id',$semester,'$subject_name',now())";
 
 	if ($conn->query($sql) === TRUE) 
 	{
@@ -426,8 +427,8 @@ elseif(isset($_POST['add_course_outline']))
 
 	else
 	{		
-			mysqli_error($conn);	
-			exit;
+			// mysqli_error($conn);	
+			// exit;
 			$_SESSION['alert'] = "Error Occured!";
 			header('location: ../course_outline/assign_course_outline.php?id='.$assign_class_id.'');
 	}	
@@ -484,7 +485,49 @@ elseif(isset($_POST['add_course_outline_daily']))
 
 
 
+//================== *Add Student Review Starts* ============================//
 
+elseif(isset($_POST['add_review'])) 
+{
+	// print_r($_POST);
+	// exit;
+	$daily_class_lecture_id = $_POST['daily_class_lecture_id'];
+	$comment=mysqli_real_escape_string($conn,$_POST['comment']);
+	$student_id=$_POST['student_id'];
+	$page_id=$_POST['page_id'];
+
+	$exist = "SELECT * from class_review where daily_class_lecture_id = $daily_class_lecture_id and student_id='$student_id'";
+
+	$query = $conn->query($exist);
+
+
+	if ($query->num_rows == 0) {
+		
+			$sql = "INSERT INTO class_review(daily_class_lecture_id,comment,student_id,created_at) VALUES ($daily_class_lecture_id,'$comment','$student_id',now())";
+
+			if ($conn->query($sql) === TRUE) 
+			{
+				$_SESSION['alert'] = "Your Review Successfully Added!";
+				header('location: ../review/daily_class_review.php?ast_id='.$page_id.'');
+			}
+		
+			else
+			{		
+
+					$_SESSION['alert'] = "Error Occured!";
+					header('location: ../review/add_new_review.php?ast_id='.$page_id.'&&id='.$daily_class_lecture_id.'');
+			}	
+	}
+	else{
+		$_SESSION['alert'] = "Already Reviewd!";
+		header('location: ../review/add_new_review.php?ast_id='.$page_id.'&&id='.$daily_class_lecture_id.'');
+	}
+
+
+
+}
+
+//================== *Add Student Review Ends* ============================//
 
 
 
