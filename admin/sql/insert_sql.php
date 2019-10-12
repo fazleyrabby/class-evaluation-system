@@ -11,6 +11,8 @@ if (isset($_POST['signup']))
 	$name=$_POST['name'];
 	$email=$_POST['email'];
 	$username=$_POST['username'];
+	$semester=$_POST['semester'];
+	$section=$_POST['section'];
 	$user_type=$_POST['user_type'];
 	$department=$_POST['department'];
 	$password=md5($_POST['password']);
@@ -34,7 +36,7 @@ if (isset($_POST['signup']))
 	{
 			$last_id = $conn->insert_id;
 			//FOR REGISTRATION FORM//
-			$reg = "INSERT INTO registration(name,email,section,department,member_id,login_id,created_at) VALUES ('$name','$section','$email','$department','$member_id',$last_id,now())";
+			$reg = "INSERT INTO registration(semester,name,email,section,department,member_id,login_id,created_at) VALUES ('$semester','$name','$email','$section','$department','$member_id',$last_id,now())";
 
 
 			if ($conn->query($reg) === TRUE) 
@@ -302,6 +304,7 @@ $name=$_POST['name'];
 $email=$_POST['email'];
 $username=$_POST['username'];
 $department=$_POST['department'];
+$semester=$_POST['semester'];
 $section=$_POST['section'];
 $password=md5($_POST['password']);
 
@@ -311,7 +314,7 @@ if ($conn->query($login) === TRUE)
 {
 		$last_id = $conn->insert_id;
 		//FOR REGISTRATION FORM//
-		$reg = "INSERT INTO registration(name,email,section,department,member_id,login_id,created_at,authentication) VALUES ('$name','$email','$section','$department','$student_id',$last_id,now(),1)";
+		$reg = "INSERT INTO registration(semester,name,email,section,department,member_id,login_id,created_at,authentication) VALUES ('$semester','$name','$email','$section','$department','$student_id',$last_id,now(),1)";
 
 		//FOR teacher table
 		$student = "INSERT INTO student(student_id,name,status,created_at) VALUES ('$student_id','$name',1,now())";

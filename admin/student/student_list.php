@@ -70,13 +70,14 @@
                                                 section.section_name as section,
                                                 semester.semester_name as semester_name,
                                                 department.department_name as department
-                                                FROM  student 
-                                                LEFT JOIN registration on student.student_id=registration.member_id 
-                                                LEFT JOIN login on login.id=registration.login_id
+                                                FROM registration  
+                                                LEFT JOIN student on student.student_id=registration.member_id 
+                                                LEFT JOIN login on 
+                                                login.id=registration.login_id
                                                 LEFT JOIN section on section.id=registration.section
                                                 LEFT JOIN department on department.id=registration.department
                                                 LEFT JOIN semester on semester.id=registration.semester
-                                                where registration.authentication != 2 and login.user_type=3";
+                                                where login.user_type=3";
 
                                                 $result = $conn->query($sql);
 

@@ -164,14 +164,15 @@
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Semester</label>
                                             <div class="col-lg-9">
-                                                <select class="form-control form-control-sm" name="section">
+                                                <select class="form-control form-control-sm" name="semester">
                                                     <option>Select Semester</option>
                                                     <?php
                                                     $sql = "SELECT * from semester where status = 1";
                                                     $query = $conn->query($sql);
                                                     $row = $query->num_rows;
                                                     if ($row > 0) {
-                                                        while ($data = $query->fetch_assoc()){
+                                                        while ($data = $query->fetch_assoc())
+                                                        {
 
                                                             $id = $data['id'];
                                                             $name = $data['semester_name'];
