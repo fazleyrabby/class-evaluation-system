@@ -56,11 +56,12 @@
                                             <label class="col-lg-2 control-label">Session</label>
                                             <div class="col-lg-10">
 
-                                            <select class="form-control" name="session_name" id="">
+                                            <input type="text" class="form-control" name="session_name" placeholder="Enter Session Name">
+                                            <!-- <select class="form-control" name="session_name" id="">
                                                 <option value="">Select</option>
                                                 <option value="jan-jun">Jan-Jun</option>
                                                 <option value="july-dec">July-Dec</option>
-                                            </select>
+                                            </select> -->
                                             </div> 
                                             
                                             </div>
@@ -74,6 +75,8 @@
                                                 <option value="2020">2020</option>
                                                 <option value="2021">2021</option>
                                                 <option value="2022">2022</option>
+                                                <option value="2023">2022</option>
+                                                <option value="2024">2022</option>
                                             </select>
                                             </div>
                                             </div>

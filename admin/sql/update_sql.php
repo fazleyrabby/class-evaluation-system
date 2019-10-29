@@ -553,11 +553,12 @@ elseif(isset($_POST['update_review']))
 	$comment=mysqli_real_escape_string($conn,$_POST['comment']);
 	// $student_id=$_POST['student_id'];
 	$page_id=$_POST['page_id'];
+	$rating=$_POST['rating'];
 
 
 
 
-	$sql = "UPDATE class_review set comment='$comment' where id=$edit_id";
+	$sql = "UPDATE class_review set comment='$comment',rating='$rating' where id=$edit_id";
 
 	if ($conn->query($sql) === TRUE) 
 	{

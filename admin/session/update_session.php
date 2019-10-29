@@ -75,11 +75,12 @@ include('../includes/db/connection_db.php');?>
                                             <label class="col-lg-2 control-label">Session</label>
                                             <div class="col-lg-10">
 
-                                            <select class="form-control" name="session_name" id="">
+                                            <input type="text" class="form-control" name="session_name" value="<?=$month;?>" placeholder="Enter Session Name">
+                                            <!-- <select class="form-control" name="session_name" id="">
                                                 <option value="">Select</option>
-                                                <option value="jan-jun" <?php echo $month == "jan-jun" ? 'selected' : '' ?> >Jan-Jun</option>
-                                                <option value="july-dec" <?php echo $month == "july-dec" ? 'selected' : '' ?> >July-Dec</option>
-                                            </select>
+                                                <option value="jan-jun" </?php echo $month == "jan-jun" ? 'selected' : '' ?> >Jan-Jun</option>
+                                                <option value="july-dec" </?php echo $month == "july-dec" ? 'selected' : '' ?> >July-Dec</option>
+                                            </select> -->
                                             </div> 
                                             
                                             </div>
@@ -94,6 +95,8 @@ include('../includes/db/connection_db.php');?>
                                                 <option value="2020" <?php echo $year == "2020" ? 'selected' : ''?>>2020</option>
                                                 <option value="2021" <?php echo $year == "2021" ? 'selected' : ''?>>2021</option>
                                                 <option value="2022" <?php echo $year == "2022" ? 'selected' : ''?>>2022</option>
+                                                <option value="2023" <?php echo $year == "2023" ? 'selected' : ''?>>2023</option>
+                                                <option value="2024" <?php echo $year == "2024" ? 'selected' : ''?>>2024</option>
                                             </select>
                                             </div>
                                             </div>

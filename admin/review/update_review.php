@@ -70,6 +70,7 @@
                                                 }
                                                 $sql = "SELECT 
                                                 class_review.comment as comment,
+                                                class_review.rating as rating,
                                                 daily_class_lecture.id as daily_class_lecture_id,class_no, course_outline,
                                                 section.section_name as section,
                                                 session.session_name as session,
@@ -101,6 +102,7 @@
                                                  $course_outline=$data['course_outline']; 
                                                  $class_no=$data['class_no']; 
                                                  $comment=$data['comment']; 
+                                                 $rating=$data['rating']; 
                                                     
                                                  $daily_class_lecture_id=$data['daily_class_lecture_id'];
                                                     
@@ -148,6 +150,15 @@
 
                                                 <div class="col-lg-9">
                                                 <textarea name="course_outline" id="" rows="5" readonly class="form-control"><?php echo $course_outline;?></textarea>
+                                                </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                <label class="col-lg-3 control-label">Rating
+                                                </label>
+
+                                                <div class="col-lg-9">
+                                                <input required id="review_star" name="rating" value="<?=$rating?>" type="text" title="">
                                                 </div>
                                                 </div>
 
@@ -202,7 +213,7 @@
 
           <script>
           $('.select2').select2();
-          
+          $("#review_star").rating();
           </script>
 
     </body>

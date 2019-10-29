@@ -424,7 +424,7 @@ elseif(isset($_POST['add_course_outline']))
 		$_SESSION['alert'] = "Class Outline added succesfully!";
 		header('location: ../course_outline/assign_course_outline.php?id='.$assign_class_id.'');
 	}
-
+	
 	else
 	{		
 			// mysqli_error($conn);	
@@ -444,8 +444,6 @@ elseif(isset($_POST['add_course_outline']))
 
 
 //================== *Add No of class starts* ============================//
-
-
 
 
 elseif(isset($_POST['add_course_outline_daily'])) 
@@ -475,12 +473,7 @@ elseif(isset($_POST['add_course_outline_daily']))
 }
 
 
-
-
 //================== *Add No of class ends* ============================//
-
-
-
 
 
 
@@ -495,6 +488,7 @@ elseif(isset($_POST['add_review']))
 	$comment=mysqli_real_escape_string($conn,$_POST['comment']);
 	$student_id=$_POST['student_id'];
 	$page_id=$_POST['page_id'];
+	$rating=$_POST['rating'];
 
 	$exist = "SELECT * from class_review where daily_class_lecture_id = $daily_class_lecture_id and student_id='$student_id'";
 
@@ -503,7 +497,7 @@ elseif(isset($_POST['add_review']))
 
 	if ($query->num_rows == 0) {
 		
-			$sql = "INSERT INTO class_review(daily_class_lecture_id,comment,student_id,created_at) VALUES ($daily_class_lecture_id,'$comment','$student_id',now())";
+			$sql = "INSERT INTO class_review(daily_class_lecture_id,comment,student_id,created_at,rating) VALUES ($daily_class_lecture_id,'$comment','$student_id',now(),$rating)";
 
 			if ($conn->query($sql) === TRUE) 
 			{

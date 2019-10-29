@@ -145,7 +145,7 @@
                                                     $options .= '<option value="'.$i.'">Class '.$i.'</option>';
                                                   }
                                                   else{
-                                                      $options ='';
+                                                      $options = '';
                                                     }
                                                   }
 

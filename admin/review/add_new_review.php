@@ -6,6 +6,9 @@
 <head>
         <?php include('../includes/head_link.php');?>
 
+        
+
+
     </head>
     <body class="fixed-top">
 
@@ -139,10 +142,27 @@
                                                 <label class="col-lg-3 control-label">Class topic
                                                 </label>
 
+                                                
+
                                                 <div class="col-lg-9">
                                                 <textarea name="course_outline" id="" rows="5" readonly class="form-control"><?php echo $course_outline;?></textarea>
                                                 </div>
                                                 </div>
+
+                                                <div class="form-group">
+                                                <label class="col-lg-3 control-label">Rating
+                                                </label>
+
+                                                
+
+                                                <div class="col-lg-9">
+                                                <input required id="review_star" name="rating" value="" type="text" title="">
+                                                </div>
+                                                </div>
+
+
+                                                
+
 
                                                 <div class="form-group">
                                                 <label class="col-lg-3 control-label">Review
@@ -193,9 +213,12 @@
     <!-- JAVASCRIPT FILES -->
           <?php include('../includes/footer_link.php');?>
 
+         
           <script>
           $('.select2').select2();
-          
+
+          $("#review_star").rating();
+
           </script>
 
     </body>

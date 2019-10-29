@@ -31,6 +31,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
         <script src="<?=$base?>/assets/plugins/select/select2.js"></script>
+
+        <script src="<?=$base?>/assets/js/star-rating.js" type="text/javascript"></script>
         
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js">
 </script>

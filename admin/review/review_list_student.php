@@ -6,7 +6,13 @@
 <head>
         <?php include('../includes/head_link.php');?>
 
-    </head>
+</head>
+
+<style>
+.rating-container.rating-xs.rating-animate.rating-disabled{
+    display: inline-flex;
+}
+</style>
     <body class="fixed-top">
 
         <!-- wrapper -->
@@ -68,22 +74,22 @@
                                 </div>
                             </div>
                         </div><!-- end .page title-->
-                         
-                       
-                        <a class="btn btn-info" href="<?=$base?>/review/subject_wise_class_list.php?id=<?=$_GET['page_id'];?>">Back</a>
 
+                        <a class="btn btn-info" href="<?=$base?>/review/subject_wise_class_list.php?id=<?=$_GET['page_id'];?>">Back</a>
                         <div class="row">
-                        <div class="col-md-10 col-md-offset-1"><div class="panel panel-card margin-b-30 m-4">
+                        <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-card margin-b-30 m-4">
                               <div class="panel-heading">
-                                      <h5>Class wise list</h5>
-                                    </div>
-                              <div class="panel-body">
-                              <div class="table-responsive">
+                                <h5>Class wise list</h5>
+                              </div>
+                                    <div class="panel-body">
+                                    <div class="table-responsive">
                                             <table id="basic-datatables" class="table table-bordered" style="table-layout:fixed">
                                                 <thead>
                                                     <tr>
                                                         <th width='15%'> Student ID </th>
                                                         <th> Name </th>
+                                                        <th> Rating </th>
                                                         <th> Review Details </th>
                                                     </tr>
                                                 </thead>
@@ -96,6 +102,7 @@
                                                 $sql = "SELECT 
                                                 class_review.student_id as student_id,
                                                 class_review.comment as review,
+                                                class_review.rating as rating,
                                                 student.name as student_name
                                                 from daily_class_lecture as dcl
                                                 join class_review
@@ -108,27 +115,25 @@
 
                                                 if ($result->num_rows > 0) {
                                                 while($row = $result->fetch_assoc()) { ?>
-
                                                     <tr>
-                                                        
                                                         <td><?php echo $row['student_id'];?></td>
                                                         <td><?php echo $row['student_name'];?></td>
+                                                        <td>
+                                                        <input required id="review_star" name="rating" value="<?=$row['rating']?>" type="text" title="" disabled>
+
+                                                        <?php echo $row['rating'];?>
+                                                        </td>
                                                         <td><?php echo $row['review'];?></td>
-                                                        
                                                     </tr>
                                                     <?php } 
                                                     }
-                                                    else{ ?>
-
+                                                    else { ?>
                                                     <tr>
-                                                    <td colspan="3"><h6 style='text-align:center;font-weight:bold'>NO REVIEW DATA</h6></td>
-                                                    <td style="display: none;"></td>
-                                                    <td style="display: none;"></td>
-                                                        
+                                                        <td colspan="3"><h6 style='text-align:center;font-weight:bold'>NO REVIEW DATA</h6></td>
+                                                        <td style="display: none;"></td>
+                                                        <td style="display: none;"></td>   
                                                     </tr>
-                                                   <?php  } 
-                                                    
-                                                    
+                                                   <?php  }   
                                                     ?>
                                                 </tbody>
                                             </table>
@@ -165,7 +170,11 @@
 
           <script>
           $('.select2').select2();
-          
+          $("#review_star").rating({
+            'size' : 'xs',
+            'showCaption': false,
+            'showClear': false
+        });
           </script>
 
     </body>

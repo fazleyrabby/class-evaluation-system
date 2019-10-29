@@ -42,6 +42,8 @@
         <!-- <link href="<?=$base?>/assets/css/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
         <!-- <script src="js/jquery-1.9.1.js"></script> -->
         <!-- PAGE LEVEL SCRIPTS -->
+
+        <link href="<?=$base?>/assets/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
         
 
     </head>

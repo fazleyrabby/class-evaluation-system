@@ -7,6 +7,12 @@
     <?php include('../includes/head_link.php');?>
 
 </head>
+<style>
+.rating-container.rating-xs.rating-animate.rating-disabled{
+    display: inline-flex;
+}
+</style>
+
 <body class="fixed-top">
 
 <!-- wrapper -->
@@ -89,6 +95,7 @@
                                         <tr>
                                             <th width='100px'> Class No </th>
                                             <th> Topic </th>
+                                            <th> Your Rating </th>
                                             <th width='270px'> Your Review </th>
                                             <th width='230px'> Add Review </th>
 
@@ -102,6 +109,7 @@
                                         $sql = "SELECT
                                             class_review.id as class_review_id,
                                             class_review.comment as comment,
+                                            class_review.rating as rating,
                                             daily_class_lecture.class_no as class_no,
                                             daily_class_lecture.id as daily_class_lecture_id,
                                             daily_class_lecture.course_outline as course_outline
@@ -123,8 +131,16 @@
                                                     <td><?php
                                                         echo substr($row['course_outline'], 0, 15)."....";?></td>
                                                         <td><?php
+                                                        echo $row['rating'] != '' ? $row['rating'] : '--' ;?>
+                                                        <input required id="review_star" name="rating" value="<?=$row['rating']?>" type="text" title="" disabled>
+                                                        </td>
+                                                        
+                                                        <td><?php
                                                         echo $row['comment'] != '' ? substr($row['comment'], 0, 50)."...." : '-Not Reviewed Yet-' ;?></td>
                                                         <td>
+
+                                                        
+
                                                         <a href="add_new_review.php?ast_id=<?=$ast_id?>&&id=<?php echo $row['daily_class_lecture_id']?>"class="btn btn-info">
                                                             Add Review
                                                         </a>
@@ -173,7 +189,11 @@
 
 <script>
     $('.select2').select2();
-
+    $("#review_star").rating({
+        'size' : 'xs',
+        'showCaption': false,
+        'showClear': false
+    });
 </script>
 
 </body>
