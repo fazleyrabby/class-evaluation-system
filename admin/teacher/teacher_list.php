@@ -63,7 +63,7 @@
                                                 <tbody>
                                                      
                                                 <?php 
-                                                $sql = "SELECT registration.member_id,registration.name,registration.email,registration.authentication as status from  teacher left join registration on teacher.teacher_id=registration.member_id 
+                                                $sql = "SELECT registration.member_id,registration.name,registration.email,registration.authentication as status from  registration left join teacher on teacher.teacher_id=registration.member_id 
                                                 left join login on login.id=registration.login_id
                                                 where registration.authentication != 2 and login.user_type=2";
 

@@ -222,7 +222,7 @@ if ($conn->query($login) === TRUE)
 		else
 		{
 				$_SESSION['alert'] = "Update Error Occured!";
-				header('location: ../teacher/add_teacher.php');
+				header('location: ../teacher/update_teacher.php?id='.$teacher_f_id.'');
 				
 		}	
 } 
@@ -230,7 +230,7 @@ if ($conn->query($login) === TRUE)
 else
 {
 		$_SESSION['alert'] = "Update Error Occured!";
-		header('location: ../teacher/add_teacher.php');
+		header('location: ../teacher/update_teacher.php?id='.$teacher_f_id.'');
 		
 }	
 
@@ -309,7 +309,7 @@ if ($conn->query($login) === TRUE)
 {
 		// $last_id = $conn->insert_id;
 		//FOR REGISTRATION FORM//
-		$reg = "UPDATE registration set name='$name',semester=$semester,section='$section',department='$department',member_id='$student_id' where login_id=$login_id";
+		$reg = "UPDATE registration set name='$name',semester='$semester',section='$section',department='$department',member_id='$student_id' where login_id=$login_id";
 
 		//FOR teacher table
 		$student = "UPDATE student set name='$name',student_id='$student_id' where id=$student_f_id";
@@ -322,8 +322,9 @@ if ($conn->query($login) === TRUE)
 		}
 		else
 		{
-				$_SESSION['alert'] = "Update Error Occured!";
-				header('location: ../student/add_student.php');
+
+			$_SESSION['alert'] = "Update Error Occured!";
+			header('location: ../student/update_student.php?id='.$student_id.'');
 				
 		}	
 } 
@@ -331,7 +332,7 @@ if ($conn->query($login) === TRUE)
 else
 {
 		$_SESSION['alert'] = "Update Error Occured!";
-		header('location: ../student/add_student.php');
+		header('location: ../student/update_student.php?id='.$student_id.'');
 		
 }	
 

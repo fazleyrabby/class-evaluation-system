@@ -129,7 +129,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-hand-o-up"></i></span>
-                            <select class="form-control form-control-sm" name="department">
+                            <select class="form-control form-control-sm" name="semester">
                                 <option>Select Semester (Only For Student)</option>
                                 <?php
                                 $sql = "SELECT * from semester where status = 1";
