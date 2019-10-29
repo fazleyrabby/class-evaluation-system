@@ -89,7 +89,7 @@
                                                     <tr>
                                                         <th width='15%'> Student ID </th>
                                                         <th> Name </th>
-                                                        <th> Rating </th>
+                                                        <th width='25%'> Rating </th>
                                                         <th> Review Details </th>
                                                     </tr>
                                                 </thead>
@@ -119,8 +119,9 @@
                                                         <td><?php echo $row['student_id'];?></td>
                                                         <td><?php echo $row['student_name'];?></td>
                                                         <td>
-                                                        <input required id="review_star" name="rating" value="<?=$row['rating']?>" type="text" title="" disabled>
-
+                                                        <?php if($row['rating'] != ''): ?>
+                                                        <input required class="review_star" name="rating" value="<?=$row['rating']?>" type="text" title="" disabled>
+                                                        <?php endif; ?>
                                                         <?php echo $row['rating'];?>
                                                         </td>
                                                         <td><?php echo $row['review'];?></td>
@@ -170,7 +171,7 @@
 
           <script>
           $('.select2').select2();
-          $("#review_star").rating({
+          $(".review_star").rating({
             'size' : 'xs',
             'showCaption': false,
             'showClear': false

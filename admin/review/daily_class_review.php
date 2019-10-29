@@ -93,9 +93,9 @@
                                     <table id="basic-datatables" class="table table-bordered" style="table-layout:fixed">
                                         <thead>
                                         <tr>
-                                            <th width='100px'> Class No </th>
+                                            <th width='80px'> Class No </th>
                                             <th> Topic </th>
-                                            <th> Your Rating </th>
+                                            <th width='120px'> Rating </th>
                                             <th width='270px'> Your Review </th>
                                             <th width='230px'> Add Review </th>
 
@@ -132,7 +132,13 @@
                                                         echo substr($row['course_outline'], 0, 15)."....";?></td>
                                                         <td><?php
                                                         echo $row['rating'] != '' ? $row['rating'] : '--' ;?>
-                                                        <input required id="review_star" name="rating" value="<?=$row['rating']?>" type="text" title="" disabled>
+                                                        
+                                                        <?php if($row['rating'] != ''): ?>
+
+                                                        <input required class="review_star" name="rating" value="<?=$row['rating']?>" type="text" title="" disabled>
+
+                                                        <?php endif; ?>
+                                                        
                                                         </td>
                                                         
                                                         <td><?php
@@ -189,7 +195,7 @@
 
 <script>
     $('.select2').select2();
-    $("#review_star").rating({
+    $(".review_star").rating({
         'size' : 'xs',
         'showCaption': false,
         'showClear': false
