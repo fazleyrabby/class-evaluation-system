@@ -70,6 +70,14 @@
                                 </ul>
                             </li>
 
+                            <li>
+                                <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Assign Subject Student</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">                               
+                                    <li><a href="<?=$base?>/subject/assign_subject_student.php">Requested List By Students</a></li>
+                                    
+                                </ul>
+                            </li>
+
 
                             <li>
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Review by Students</span><span class="fa arrow"></span></a>
@@ -114,12 +122,14 @@
                             //=================//
 
                             // THIS PART FOR STUDENTS  //
+                            
                             elseif($_SESSION['user_type'] == 3) : ?>
 
                             <li>
                                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label"> Subjects </span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">                               
                                     <li><a href="<?=$base?>/student/subject_list.php">Your Subjects</a></li>
+                                    <li><a href="<?=$base?>/student/subject_request.php">Request For Subject</a></li>
 
                                 </ul>
                             </li>
@@ -132,8 +142,6 @@
 
 
                             endif; ?>
-
-
 
                             <li class=""><a href="<?=$base?>/logout.php"><i class="fa fa-user"></i> <span class="nav-label"> &nbsp;Logout</span></a></li>
                           

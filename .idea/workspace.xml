@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2756b781-bc40-46dc-9158-24a45ea3f59f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/review/review_list_student.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/review/review_list_student.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/session/add_session.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/session/add_session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/session/update_session.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/session/update_session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/sql/insert_sql.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/sql/insert_sql.php" afterDir="false" />
-    </list>
+    <list default="true" id="2756b781-bc40-46dc-9158-24a45ea3f59f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/review/daily_class_review.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="46" column="55" lean-forward="true" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+            <state relative-caret-position="11">
+              <caret line="52" column="55" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="55" />
               <folding>
                 <element signature="e#116#123#1" expanded="true" />
               </folding>
@@ -91,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/sql/insert_sql.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1206">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
+            <state relative-caret-position="1242">
+              <caret line="69" selection-start-line="69" selection-end-line="69" />
             </state>
           </provider>
         </entry>
@@ -231,11 +225,12 @@
       <workItem from="1570721027446" duration="15701000" />
       <workItem from="1571142630141" duration="419000" />
       <workItem from="1571348122104" duration="426000" />
+      <workItem from="1572374306878" duration="193000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17168000" />
+    <option name="totallyTimeSpent" value="17361000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -510,8 +505,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/sql/insert_sql.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1206">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="1242">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
         </state>
       </provider>
     </entry>
@@ -524,8 +519,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/review/daily_class_review.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="46" column="55" lean-forward="true" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+        <state relative-caret-position="11">
+          <caret line="52" column="55" selection-start-line="52" selection-start-column="55" selection-end-line="52" selection-end-column="55" />
           <folding>
             <element signature="e#116#123#1" expanded="true" />
           </folding>

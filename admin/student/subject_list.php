@@ -44,7 +44,7 @@
                         <div class="panel panel-card recent-activites">
                             <!-- Start .panel -->
                             <div class="panel-heading">
-                                Your Subject List
+                                Your Subject List (Regular)
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -81,9 +81,84 @@
                                         on teacher.teacher_id=assign_teacher.teacher_id 
                                         left join registration 
                                         on assign_teacher.section_id=registration.section 
+                                        left join session on session.id = assign_teacher.session_id
                                         where 
-                                        subject.semester = (SELECT semester from registration where member_id = '$student_id') and
-                                        registration.member_id = '$student_id' ";
+                                        assign_teacher.section_id = (SELECT section from registration where member_id = '$student_id') and 
+                                        subject.semester = (SELECT semester from registration where member_id = '$student_id') and session.year = YEAR(CURDATE()) and registration.member_id = '$student_id'";
+
+                                        $result = $conn->query($sql);
+
+                                        if ($result->num_rows > 0) {
+                                            while($row = $result->fetch_assoc()) { ?>
+
+                                                <tr>
+                                                    <td><?php echo $row['subject_id'];?></td>
+                                                    <td><?php echo $row['subject'];?></td>
+                                                    <td><?php echo $row['teacher_name'];?></td>
+
+
+
+                                                    <td class="text-center">
+                                                        <a href="<?=$base?>/review/daily_class_review.php?ast_id=<?php echo $row['ast_id']?>"class="btn btn-success">
+                                                            View
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                            <?php } } ?>
+
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!-- End .panel -->
+
+                        <div class="panel panel-card recent-activites">
+                            <!-- Start .panel -->
+                            <div class="panel-heading">
+                                Assigned Subject List (Re-take/Improve)
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table id="basic-datatables" class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th> Subject ID </th>
+                                            <th> Subject Name</th>
+                                            <th> Taken By</th>
+                                            <th> Daily Class Lecture </th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+
+
+                                        <?php
+                                        if (isset($_SESSION['member_id'])) {
+                                            $student_id = $_SESSION['member_id'];
+                                        }
+                                        $sql = "SELECT 
+										assign_teacher.id as ast_id,
+                                        registration.name as teacher_name,
+                                        subject.subject_name as subject,
+                                        subject.subject_id as subject_id
+                                        from assign_subject_student
+                                        left join subject 
+                                        on assign_subject_student.subject_id = subject.id
+                                        left join assign_teacher
+                                        on subject.id=assign_teacher.subject_id
+                                        left join section 
+                                        on section.id=assign_teacher.section_id 
+                                        left join registration
+                                        on assign_teacher.teacher_id=registration.member_id
+                                        left join session on session.id = assign_teacher.session_id                                 
+										WHERE assign_subject_student.student_id = '$student_id' and 
+                                        session.year = YEAR(CURDATE()) and
+                                        assign_teacher.section_id = (SELECT section from registration where member_id = '$student_id')
+                                        and assign_subject_student.request_status=1";
 
                                         $result = $conn->query($sql);
 

@@ -107,5 +107,53 @@ if($delete == 'delete_section') {
 
 //================== *Delete Course Outline Topic* ============================//
 
+
+  //================== *Delete Request Subject Student Starts* ==========================//
+
+
+    if($delete == 'cancel_request_subject') {
+
+			$sql = "UPDATE assign_subject_student SET request_status=3 WHERE id=$id";
+
+			if ($conn->query($sql) === TRUE)
+			{
+					$_SESSION['alert'] = "section Deleted Successfully!";
+					header('location: ../student/subject_request.php');
+			}
+
+			else
+			{
+					$_SESSION['alert'] = "Error Occured!";
+					header('location: ../student/subject_request.php');
+			}
+
+	}
+
+//================== *Delete Request Subject Student Ends* ============================//
+
+
+  //================== *Reject Request Subject Student Starts* ==========================//
+
+
+	if($delete == 'reject_request_subject') {
+
+		$sql = "UPDATE assign_subject_student SET request_status=2 WHERE id=$id";
+
+		if ($conn->query($sql) === TRUE)
+		{
+				$_SESSION['alert'] = "Rejected Successfully!";
+				header('location: ../subject/assign_subject_student.php');
+		}
+
+		else
+		{
+				$_SESSION['alert'] = "Error Occured!";
+				header('location: ../subject/assign_subject_student.php');
+		}
+
+}
+
+//================== *Reject Request Subject Student Ends* ============================//
+
 }
 ?>

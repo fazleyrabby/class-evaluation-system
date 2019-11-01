@@ -200,7 +200,7 @@ elseif(isset($_POST['assign_teacher']))
 
 	// var_dump($_POST);
 	// exit;
-	$validation = "SELECT * FROM assign_teacher where session_id=$session and teacher_id='$teacher' and section_id = $section";
+	$validation = "SELECT * FROM assign_teacher where session_id=$session and teacher_id='$teacher' and section_id = $section and subject_id = $subjects";
 
 	$result = $conn->query($validation);
 
@@ -223,7 +223,7 @@ elseif(isset($_POST['assign_teacher']))
 	}
 	else{
 
-			$_SESSION['alert'] = "Already Assigned for this session!";
+			$_SESSION['alert'] = "Already Assigned!";
 			header('location: ../teacher/assign_teacher_list.php');
 
 	}
@@ -531,6 +531,47 @@ elseif(isset($_POST['add_review']))
 
 
 
+//================== *Request subject for student Starts* ============================//
+
+elseif(isset($_POST['request_subject'])) 
+{
+	
+	$student_id= $_POST['student_id'];
+	$subject = $_POST['subject'];
+
+	$exist = "SELECT * from assign_subject_student where student_id = '$student_id' and subject_id ='$subject'";
+
+	$query = $conn->query($exist);
+
+
+	if ($query->num_rows == 0) {
+		
+			$sql = "INSERT INTO assign_subject_student(student_id,subject_id,created_at) VALUES ('$student_id',$subject,now())";
+
+			if ($conn->query($sql) === TRUE) 
+			{
+				$_SESSION['alert'] = "Your Request Successfully Added!";
+				header('location: ../student/subject_request.php?student_id='.$student_id.'');
+			}
+		
+			else
+			{		
+
+					$_SESSION['alert'] = "Error Occured!";
+					// echo mysqli_error($conn);
+					header('location: ../student/subject_request.php?student_id='.$student_id.'');
+			}	
+	}
+	else{
+		$_SESSION['alert'] = "Already Requested For This Subject!";
+		header('location: ../student/subject_request.php?student_id='.$student_id.'');
+	}
+
+
+
+}
+
+//================== *Request subject for student Ends* ============================//
 
 
 

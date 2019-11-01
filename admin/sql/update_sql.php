@@ -581,4 +581,70 @@ elseif(isset($_POST['update_review']))
 
 //================== *update Student Review Ends* ============================//
 
+
+
+//================== *Request subject for student EDIT Starts* ============================//
+
+elseif(isset($_POST['request_subject_edit'])) 
+{
+	$student_id= $_POST['student_id'];
+	$subject = $_POST['subject'];
+	$prev_subject = $_POST['prev_subject'];
+
+	$exist = "SELECT * from assign_subject_student where student_id = '$student_id' and (subject_id ='$subject' or subject_id ='$prev_subject')";
+
+	$query = $conn->query($exist);
+
+	if ($query->num_rows == 0) {
+		
+			$sql = "UPDATE assign_subject_student set subject_id = $subject)";
+
+			if ($conn->query($sql) === TRUE) 
+			{
+				$_SESSION['alert'] = "Your Request Successfully Updated!";
+				header('location: ../student/subject_request.php');
+			}
+			else
+			{		
+				$_SESSION['alert'] = "Error Occured!";
+				// echo mysqli_error($conn);
+				header('location: ../student/subject_request.php');
+			}	
+	}
+	else{
+			$_SESSION['alert'] = "Already Requested For This Subject!";
+			header('location: ../student/subject_request.php?student_id='.$student_id.'');
+	}
+
+}
+
+//================== *Request subject for student EDIT Ends* ============================//
+
+ //================== *Accept Request Subject Student Starts* ==========================//
+
+
+ elseif(isset($_GET['update']))  {
+	 if($_GET['update'] == 'subject_assign_student'){
+
+		$id = $_GET['id'];
+		$sql = "UPDATE assign_subject_student SET request_status=1 WHERE id=$id";
+
+		if ($conn->query($sql) === TRUE)
+		{
+				$_SESSION['alert'] = "Assigned Successfully!";
+				header('location: ../subject/assign_subject_student.php');
+		}
+	
+		else
+		{
+				$_SESSION['alert'] = "Error Occured!";
+				header('location: ../subject/assign_subject_student.php');
+		}
+
+	 }
+}
+
+//================== *Accept Request Subject Student Ends* ============================//
+
+
 ?>
